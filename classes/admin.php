@@ -34,6 +34,27 @@ public function showTeachers(){
             }
             
         }
+        public function showUsers(){
+            try{
+                  $users=$this->db->prepare("SELECT *FROM users WHERE  role='Etudiant 'OR role='teacher'");
+            $users->execute();
+            return $users->fetchALL(PDO::FETCH_ASSOC);
+            }
+            catch(PDOException $e){
+                return "erreur".$e->getMessage();
+            }
+          
+            
+        }
+        public function removeUser($userid){
+            try{
+                $user=$this->db->prepare("DELETE  FROM users WHERE user_id=:userid");
+               return $user->execute([':userid'=>$userid]);  
+            }
+catch(PDOException $e){
+    return "erreur".$e->getMessage();
+}
+        }
 }
 
 

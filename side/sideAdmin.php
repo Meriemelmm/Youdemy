@@ -65,9 +65,9 @@
     
         <div class="sidebar-footer">
             <div class="user-info">
-                <img src="https://api.dicebear.com/6.x/initials/svg?seed=JohnDoe" class="user-avatar">
+                <img src="https://api.dicebear.com/6.x/initials/svg?seed=" class="user-avatar">
                 <div>
-                    <p class="user-name"><?php echo $_SESSION['username']?></p>
+                    <p class="user-name"><?= $_SESSION['username'] ?></p>
                     <p class="user-role">administrateur</p>
                 </div>
             </div>

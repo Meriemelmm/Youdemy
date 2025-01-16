@@ -1,3 +1,21 @@
+
+<?php
+require'../classes/admin.php';
+$admin=new admin();
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['delete']) && isset($_POST['user_id'])){
+        $userid=$_POST['user_id'];
+         $admin->removeUser($userid);
+    }
+}
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +26,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<?php include '../side/sideAdmin.php';?>
+ <?php include '../side/sideAdmin.php';?> 
 
 
 <main class="main-content">
@@ -33,21 +51,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                <?php $users=$admin->showUsers();
+                foreach($users as $user):?>
                    
                     <tr>
                         <td>
-                            hbsbdbhd
+                            <?php echo htmlspecialchars($user['username'])?>
                         </td>
-                        <td>jksdjsj</td>
-                        <td>njdnjsq</td>
+                        <td><?php echo htmlspecialchars($user['email'])?></td>
+                        <td><?php echo htmlspecialchars($user['role'])?></td>
                
                         <td class="actions">
                       
                                 
                                
                                 <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                <input type="hidden" name="user_id" value="">
+                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id'])?>">
                                 <button  style="background:transparent;border:none"type="submit" name="delete" class="delete-btn">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -56,7 +75,7 @@
                           
                         </td>
                     </tr>
-                   
+                   <?php endforeach?>
                 </tbody>
             </table>
         </div>
