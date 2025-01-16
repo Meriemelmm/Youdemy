@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+ 
+ 
+ 
+ 
+ <?php
+ require'../classes/admin.php';
+ $admin=new admin();
+
+$admin->showTeachers();
+
+ 
+ 
+ 
+ 
+ 
+ ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -148,19 +163,23 @@
                     </tr>
                 </thead>
                 <tbody class="table-body">
-                    <!-- Exemple de ligne, à remplacer par du PHP -->
+                   
+                <?php   $teachers=$admin->showTeachers();
+
+                foreach($teachers as $teacher):
+                ?>
                     <tr class="table-row">
                         <td class="table-cell user-info">
                             <img src="https://api.dicebear.com/6.x/initials/svg?seed=JohnDoe" alt="Avatar" class="avatar">
-                            <span>JohnDoe</span>
+                            <span><?php echo htmlspecialchars($teacher['username'])?></span>
                         </td>
-                        <td class="table-cell">john.doe@example.com</td>
+                        <td class="table-cell"><?php echo htmlspecialchars($teacher['email'])?></td>
                         <td class="table-cell">
-                            <span class="role-badge admin">pending</span>
+                            <span class="role-badge admin"><?php echo htmlspecialchars($teacher['compte_status'])?></span>
                         </td>
                         <td class="table-cell">
-                            <form action="../users/roles.php" method="POST" class="form">
-                                <input type="hidden" name="user_id" value="">
+                            <form action="" method="POST" class="form">
+                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($teacher['compte_status'])?>">
                                 <select name="status" class="role-select">
                                     <option value="pending">pending</option>
                                     <option value="'accepted" selected>accepted</option>
@@ -170,7 +189,7 @@
                             </form>
                         </td>
                     </tr>
-                    
+                   <?php endforeach ?> 
                 </tbody>
             </table>
         </div>

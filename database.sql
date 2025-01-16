@@ -4,17 +4,17 @@ CREATE TABLE Users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     role ENUM('Etudiant', 'teacher', 'admin') NOT NULL,
-    status ENUM('active', 'banned') DEFAULT 'active',
+    status ENUM('active', 'banned') DEFAULT 'active',    compte_status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    
 );
 
-    CREATE TABLE Teachers (
-    teacher_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-   compte_status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
-);
+--     CREATE TABLE Teacher (
+--     teacher_id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT ,
+--    compte_status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
+--     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+-- );
 
 CREATE TABLE Cours (
     cours_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,7 +29,7 @@ CREATE TABLE Cours (
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES Categories(id)ON DELETE CASCADE,
-    FOREIGN KEY (teacher_id) REFERENCES teacher_id(teacher_id)ON DELETE CASCADE,
+    FOREIGN KEY (teacher_id) REFERENCES users(user_id)ON DELETE CASCADE,
      FOREIGN KEY (tag_id) REFERENCES tagss(tag_id)ON DELETE CASCADE,
     
 );

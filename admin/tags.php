@@ -50,13 +50,51 @@
     <div  class="content"style="dislplay:flex;">
     <?php include '../side/sidebarTeacher.php';?>
     
-    <form action="">
-       
-            <input type="text"  class="search-input"id="tagInput" placeholder="Ajouter un tag...">
-            <button onclick="ajouterTag()">Ajouter</button>
-            <div id="tagsList"></div>
-        
-    </form>
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="header">
+                <div>
+                    <h2 class="title">Ajouter un jeu</h2>
+                    <p class="subtitle">Créer une nouvelle fiche de jeu</p>
+                </div>
+            </div>
+    
+            <form action="add.php" method="POST" class="form-container">
+                <div class="form-grid">
+                    <div class="form-item full-width">
+                        <label for="title" class="form-label">Titre du jeu</label>
+                        <input type="text" id="title" name="title" required class="form-input">
+                    </div>
+    
+                    <div class="form-item full-width">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" name="description" rows="4" class="form-input"></textarea>
+                    </div>
+    
+                    <div class="form-item">
+                        <label for="genre" class="form-label">Genre</label>
+                        <input type="text" id="genre" name="genre" required class="form-input">
+                    </div>
+    
+                    <div class="form-item">
+                        <label for="release_date" class="form-label">Date de sortie</label>
+                        <input type="date" id="release_date" name="release_date" class="form-input">
+                    </div>
+    
+                    <div class="form-item full-width">
+                        <label for="game_image" class="form-label">Image URL</label>
+                        <input type="url" id="game_image" name="game_image" class="form-input">
+                    </div>
+    
+                    <div class="form-item full-width">
+                        <button type="submit" name="ajoute" class="submit-btn">
+                            Ajouter le jeu
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
   
          
      

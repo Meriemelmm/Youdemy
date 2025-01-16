@@ -50,14 +50,14 @@
             <div class="user-info">
                 <img src="https://api.dicebear.com/6.x/initials/svg?seed=JohnDoe" class="user-avatar">
                 <div>
-                    <p class="user-name">John Doe</p>
+                    <p class="user-name"><?php echo $_SESSION['username']?></p>
                     <p class="user-role">Teacher</p>
                 </div>
             </div>
             <a href="../profile/profile.php" class="footer-link">
                 <i class="fas fa-user"></i>Mon Profil
             </a>
-            <a href="../auth/signOut.php" class="footer-link">
+            <a href="../auth/login.php" class="footer-link">
                 <i class="fas fa-sign-out-alt"></i>Déconnexion
             </a>
         </div>

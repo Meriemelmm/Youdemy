@@ -1,13 +1,15 @@
 <?php
 
 require_once'../classes/database.php';
+session_start();
 class user {
+    private $id;
 private $username;
 private $email;
 private $password;
 private $role;
 private $status;
-private $db;
+protected $db;
 
 
 public function __construct() {
@@ -78,16 +80,26 @@ public function login($email, $password){
         $users->execute();
 
        
-        $result = $users->fetch(PDO::FETCH_ASSOC);
+        $user = $users->fetch(PDO::FETCH_ASSOC);
 
       
-        if ($result) {
+        if ($user) {
             
-            if (password_verify($password, $result['password'])) {
-              
-                switch ($result['role']) {
+            if (password_verify($password, $user['password'])) {
+                $this->id = $user['user_id'];
+                $this->email = $user['email'];
+                $this->username = $user['username'];
+                $this->role = $user['role'];
+                $this->status = $user['status'];
+                session_start();
+    
+                $_SESSION['user_id'] = $this->id;
+                $_SESSION['username'] = $this->username;
+                $_SESSION['role'] = $this->role;
+                switch ($user['role']) {
                     case 'admin':
-                        header("Location: ../admin/boardAd.php");
+                        header("Location: ../admin/boardAd.php?user_id=" );
+
                         exit();
                     case 'teacher':
                         header("Location: ../teacher/add.php");
