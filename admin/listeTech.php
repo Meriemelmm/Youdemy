@@ -7,6 +7,20 @@
  $admin=new admin();
 
 $admin->showTeachers();
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if(isset($_POST['modifier']) && isset($_POST['status'])&& isset($_POST['user_id'])){
+        $status=$_POST['status'];
+        $userid=$_POST['user_id'];
+        try{
+            echo $admin-> validatedCompte($status,$userid);
+        }
+        catch(PDOException $e){
+            echo" erreur".$e->getMessage();
+        }
+    }
+}
+
 
  
  
@@ -170,20 +184,25 @@ $admin->showTeachers();
                 ?>
                     <tr class="table-row">
                         <td class="table-cell user-info">
-                            <img src="https://api.dicebear.com/6.x/initials/svg?seed=JohnDoe" alt="Avatar" class="avatar">
+                            <img src="https://api.dicebear.com/6.x/initials/svg?seed=<?= htmlspecialchars($teacher['username']) ?>" alt="Avatar" class="avatar">
                             <span><?php echo htmlspecialchars($teacher['username'])?></span>
                         </td>
                         <td class="table-cell"><?php echo htmlspecialchars($teacher['email'])?></td>
                         <td class="table-cell">
-                            <span class="role-badge admin"><?php echo htmlspecialchars($teacher['compte_status'])?></span>
+                           <?php echo htmlspecialchars($teacher['compte_status'])?>
                         </td>
+                        
                         <td class="table-cell">
                             <form action="" method="POST" class="form">
-                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($teacher['compte_status'])?>">
+                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($teacher['user_id'])?>">
                                 <select name="status" class="role-select">
-                                    <option value="pending">pending</option>
-                                    <option value="'accepted" selected>accepted</option>
-                                    <option value="'rejected" selected>rejected</option>
+                                    <option value="pending" >pending</option>
+                                    <option value="accepted">accepted</option>
+                                    <option value="rejected" >rejected</option>
+                                  
+   
+
+                                  
                                 </select>
                                 <button type="submit" name="modifier" class="btn">Modifier</button>
                             </form>
