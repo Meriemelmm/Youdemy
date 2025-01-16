@@ -55,6 +55,21 @@ catch(PDOException $e){
     return "erreur".$e->getMessage();
 }
         }
+
+        
+        public function bancompte($status,$userid){
+            try{
+                $data=[':status'=>$status,':userid'=>$userid];
+    
+           $status=$this->db->prepare("UPDATE users  SET status=:status WHERE  user_id=:userid ") ;
+           return $status->execute($data);
+    
+            }
+            catch(PDOException $e){
+                return "erreur".$e->getMessage();
+            }
+            
+        }
 }
 
 

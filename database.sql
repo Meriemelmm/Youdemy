@@ -4,7 +4,8 @@ CREATE TABLE Users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     role ENUM('Etudiant', 'teacher', 'admin') NOT NULL,
-    status ENUM('active', 'banned') DEFAULT 'active',    compte_status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
+ status ENUM('ban', 'unban') DEFAULT 'unban';
+,    compte_status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    
 );
