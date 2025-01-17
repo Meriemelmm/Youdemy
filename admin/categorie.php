@@ -1,30 +1,33 @@
-<?php
+
+
+
+
+
+<?php 
+
+
+
 
 require'../classes/admin.php';
-$admin= new admin ();
+$admin= new admin();
 if($_SERVER['REQUEST_METHOD']==='POST'){
-if(isset($_POST['ajoute']) && isset($_POST['tag'])){
-    $tagname=$_POST['tag'];
-    try{
+    if(isset($_POST['ajoute']) && isset($_POST['categorie'])){
+        $categoriename=$_POST['categorie'];
+        try{
+            $admin-> addCategorie( $categoriename);
 
-echo $admin->addtasg($tagname);
-
-
-    }
-    catch(PDOException $e){
-        echo " erreur".$e->getMessage();
+        }
+        catch(PDOException $e){
+            echo "erreur".$e->getMessage();
+        }
     }
 }
-
-
-
-}
 if($_SERVER['REQUEST_METHOD']==='POST'){
-    if(isset($_POST['removetag']) && isset($_POST['tag_id'])){
-        $tagid=$_POST['tag_id'];
+    if(isset($_POST['removecat']) && isset($_POST['categorie_id'])){
+        $categorieid=$_POST['categorie_id'];
         try{
     
-    echo $admin->removeTags($tagid);
+    echo $admin-> removeCategorie($categorieid);
     
     
         }
@@ -32,9 +35,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             echo " erreur".$e->getMessage();
         }
     }}
-
-
-
 
 
 
@@ -48,11 +48,22 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
 
 
-
-
-
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="../styleee.css">
+   <link rel="stylesheet" href="../styles.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   <style></style>
+</head>
+<body>
+    
 
+<?php include '../side/sideAdmin.php';?>
+<!DOCTYPE html>
 
 
 
@@ -75,23 +86,23 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 </head>
 <body >
     <div  class="content"style="dislplay:flex;">
-
     <?php include '../side/sideAdmin.php';?>
+    
     <main class="main-content">
         <div class="content-wrapper">
             <div class="header">
                 <div>
-                    <h2 class="title">Ajouter un tag</h2>
-                    <p class="subtitle">Créer une nouveau tag</p>
+                    <h2 class="title">Ajouter une categorie</h2>
+                    <p class="subtitle">Créer une nouvelle  categorie</p>
                 </div>
             </div>
     
-            <form action="../admin/tags.php" method="POST" class="form-container">
+            <form action="../admin/categorie.php" method="POST" class="form-container">
                 
     
                     <div class="form-item">
-                        <label for="genre" class="form-label">TAG</label>
-                        <input type="text" id="TAG" name="tag" required class="form-input">
+                        <label for="genre" class="form-label">categorie</label>
+                        <input type="text" id="categorie" name="categorie" required class="form-input">
                     </div>
     
                    
@@ -100,7 +111,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     
                     <div class="form-item full-width">
                         <button type="submit" name="ajoute" class="submit-btn">
-                            Ajouter le tag
+                            Ajouter la categorie
                         </button>
                     </div>
                 </div>
@@ -113,8 +124,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="container">
         <div class="header">
             <div>
-                <h2 class="title">Gérer tags </h2>
-                <p class="subtitle">Liste  des tags</p>
+                <h2 class="title">Gérer utilisateurs </h2>
+                <p class="subtitle">Liste d'utilisateurs</p>
             </div>
            
         </div>
@@ -130,12 +141,15 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                     </tr>
                 </thead>
                 <tbody>
-               <?php $tags=$admin->showTags();
-               foreach($tags as $tag)   :  ?>
+              
+                   <?php
+                   $categories=$admin-> showCategorie();
+                   foreach($categories as $categorie):
                    
+                   ?>
                     <tr>
                         <td>
-                           <?php echo htmlspecialchars($tag['tag_name'])?>
+                        <?php     echo htmlspecialchars($categorie['categorie_name'])?>
                         </td>
                        
                
@@ -143,9 +157,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                       
                                 
                                
-                                <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet tag ?');">
-                                <input type="hidden" name="tag_id" value="<?php echo htmlspecialchars($tag['tag_id'])?>">
-                                <button  style="background:transparent;border:none"type="submit" name="removetag" class="delete-btn">
+                                <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette categorie  ?');">
+                                <input type="hidden" name="categorie_id" value="    <?php echo htmlspecialchars($categorie['categorie_id'])?>">
+                                <button  style="background:transparent;border:none"type="submit" name="removecat" class="delete-btn">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -161,5 +175,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 </main>
          
      
+</body>
+</html>
 </body>
 </html>

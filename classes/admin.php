@@ -70,7 +70,61 @@ catch(PDOException $e){
             }
             
         }
-}
+        public function addtasg($tagname){
+            try{
+                 $tags=$this->db->prepare("INSERT INTO tags (tag_name) VALUE(:name)");
+            return $tags->execute([':name'=>$tagname]);
+            }
+            catch(PDOException $e){
+                return " erreur".$e->getMessage();
+            }
+           
+        }
+        public function showTags(){
+            try{
+                $showTags=$this->db->prepare("SELECT * FROM tags");
+                $showTags->execute();
+                return $tags=$showTags->fetchALL(PDO::FETCH_ASSOC);
+
+            }
+            catch(PDOException $e){
+                echo" erruer".$e->getMessage();
+            }
+        }
+        public function removeTags($tagid){
+
+ $remove=$this->db->prepare("DELETE FROM tags WHERE tag_id=:tagid");
+ return $remove->execute([':tagid'=>$tagid]);
+ 
+
+            }
+             public function addCategorie( $categoriename){
+                $categories=$this->db->prepare("INSERT into categories (categorie_name) VALUE(:catgeoriename )");
+               return $categories->execute([':catgeoriename'=>$categoriename]);
+
+             }
+             public function showCategorie(){
+                $categories=$this->db->prepare("SELECT * FROM categories ");
+                $categories->execute();
+                return $categories->fetchALL(PDO::FETCH_ASSOC);
+             }
+             public function removeCategorie($categorieid){
+
+                try{
+                     $remove=$this->db->prepare("DELETE FROM categories WHERE categorie_id=:categorieid");
+                return $remove->execute([':categorieid'=>$categorieid]);
+                
+                }
+                catch(PDOException $e ){
+                    echo " erreur".$e->getMessage();
+                }
+
+               
+               
+                           }
+
+        }
+
 
 
 

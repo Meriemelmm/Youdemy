@@ -34,11 +34,11 @@
                        
                         <span>Gérer les cours</span>
                     </a>
-                    <a href="../teacher/manage.php" class="nav-link">
+                    <a href="../admin/tags.php" class="nav-link">
                     <i class="fas fa-tags"></i>
                         <span>Gérer les tags</span>
                     </a>
-                    <a href="../teacher/manage.php" class="nav-link">
+                    <a href="../admin/categorie.php" class="nav-link">
                     <i class="fas fa-list"></i>
                         <span>Gérer les categories</span>
                     </a>
@@ -67,7 +67,7 @@
             <div class="user-info">
                 <img src="https://api.dicebear.com/6.x/initials/svg?seed=" class="user-avatar">
                 <div>
-                    <p class="user-name"><?= $_SESSION['username'] ?></p>
+                    <p class="user-name"></p>
                     <p class="user-role">administrateur</p>
                 </div>
             </div>
