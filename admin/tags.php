@@ -1,19 +1,28 @@
 <?php
 
 require'../classes/admin.php';
+// require '../classes/user.php';
+// if (!isset($_SESSION['username'])) {
+//     header('Location: ../auth/login.php');
+//     exit();
+// }
 $admin= new admin ();
 if($_SERVER['REQUEST_METHOD']==='POST'){
 if(isset($_POST['ajoute']) && isset($_POST['tag'])){
     $tagname=$_POST['tag'];
-    try{
+   // $alltgs=explode(",",$tagname);
+    print_r($tagname);
+//     try{
+// foreach($alltgs as $tag){
 
-echo $admin->addtasg($tagname);
+//      $admin->addtasg($tag);
+// }
 
 
-    }
-    catch(PDOException $e){
-        echo " erreur".$e->getMessage();
-    }
+//     }
+//     catch(PDOException $e){
+//         echo " erreur".$e->getMessage();
+//     }
 }
 
 
@@ -86,7 +95,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 </div>
             </div>
     
-            <form action="../admin/tags.php" method="POST" class="form-container">
+            <form action="test.php" method="POST" class="form-container">
                 
     
                     <div class="form-item">

@@ -1,4 +1,9 @@
-<?php session_start();?><!DOCTYPE html>
+<?php 
+ require '../classes/user.php';
+ if (!isset($_SESSION['username'])) {
+     header('Location: ../auth/login.php');
+     exit();
+ }?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

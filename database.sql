@@ -21,15 +21,15 @@ CREATE TABLE Cours (
     cours_id INT PRIMARY KEY AUTO_INCREMENT,
    cours_ title VARCHAR(255) NOT NULL,
     cours_description TEXT NOT NULL,
-    text_content TEXT,         
+    text_content TEXT DEFAULT NULL ,         
     vedio_content VARCHAR(255),      
-    category_id INT,
+    category_id INT default NULL,
      tag_id INT,
  
     teacher_id INT, 
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES Categories(id)ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES Categories(categorie_id)ON DELETE CASCADE,
     FOREIGN KEY (teacher_id) REFERENCES users(user_id)ON DELETE CASCADE,
      FOREIGN KEY (tag_id) REFERENCES tagss(tag_id)ON DELETE CASCADE,
     
