@@ -27,11 +27,21 @@
                     </a>
                 </div>
                 <div class="nav-item">
-                    <a href="../teacher/manage.php" class="nav-link">
-                        <i class="fas fa-book"></i>
-                        <span>Gérer les cours</span>
+                    <a href="../teacher/pdfcour.php" class="nav-link">
+                    <i class="fas fa-file-pdf"></i>
+
+                        <span>   Les pdf cours</span>
                     </a>
                 </div>
+                <div class="nav-item">
+                    <a href="../teacher/vediocour.php" class="nav-link">
+                     <i class="fas fa-video"></i>
+
+
+                        <span>Les vedio cours</span>
+                    </a>
+                </div>
+
             </div>
     
             <div class="nav-section">
@@ -50,7 +60,7 @@
             <div class="user-info">
                 <img src="https://api.dicebear.com/6.x/initials/svg?seed=JohnDoe" class="user-avatar">
                 <div>
-                    <p class="user-name"><?php echo $_SESSION['username']?></p>
+                    <p class="user-name"></p>
                     <p class="user-role">Teacher</p>
                 </div>
             </div>

@@ -1,3 +1,32 @@
+<?php
+
+
+session_start();
+
+
+require'../classes/vedio.php';
+$teacherId=$_SESSION['user_id'];
+$course= new cour_vedio();
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    if(isset($_POST['remove']) && isset($_POST['cours_id'])){
+        try{
+             $coursid=$_POST['cours_id'];
+        $course->removeCour($coursid);
+        }
+        catch(PDOException $e){
+            return "erruer".$e->getMessage();
+
+        }
+       
+    }
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,46 +55,46 @@
             <table>
                 <thead>
                     <tr>
-                        <th>titre</th>
-                        <th>Titdescriptre</th>
-                        <th>tags</th>
+                    <th>titre</th>
+                        <th>description</th>
                         <th>categorie</th>
-                        <th>Ajouté le</th>
-                        <th>Date de sortie</th>
+                       
+                        <th>content</th>
+                        <th>tags</th>
+                        
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     
                    
+                <?php $cours=$course->showCour($teacherId);
+                   foreach($cours as $cour)  : 
+           
+                    
+                         ?>
                     <tr>
                         <td>
-                            hbsbdbhd
+                            <?php echo htmlspecialchars($cour['cours_title'])?>
                         </td>
-                        <td>jksdjsj</td>
-                        <td>njdnjsq</td>
-                        <td>djs</td>
-                        <td>dnn</td>
-                        <td>ds</td>
+                        <td> <?php echo htmlspecialchars($cour['cours_description'])?></td>
+                        <td> <?php echo htmlspecialchars($cour['categorie_name'])?></td>
+                        <td>   <?php echo htmlspecialchars($cour['vedio_content']);?> 
+                    </td>
+                        <td> <?php echo htmlspecialchars($cour['cours_title'])?></td>
+                       
                         <td class="actions">
                             <div class="action-btns">
-                                <!-- <a href=" "
-                                   class="edit-btn">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href=" "
-                                   class="edit-btn">
-                                   <i class="fas fa-trash"></i>
-                                </a> -->
+                              
                                 <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                <input type="hidden" name="user_id" value="">
+                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
                                 <button type="submit" name="delete" class="delete-btn">
                                 <i class="fas fa-edit"></i>
                                 </button>
                             </form>
-                                <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                <input type="hidden" name="user_id" value="">
-                                <button type="submit" name="delete" class="delete-btn">
+                                <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet cours ?');">
+                                <input type="hidden" name="cours_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
+                                <button type="submit" name="remove" class="delete-btn">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -73,7 +102,7 @@
                             </div>
                         </td>
                     </tr>
-                   
+                   <?php endforeach;?>
                 </tbody>
             </table>
         </div>

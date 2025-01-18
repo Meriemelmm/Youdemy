@@ -6,17 +6,17 @@ require'../classes/admin.php';
 //     header('Location: ../auth/login.php');
 //     exit();
 // }
-$admin= new admin ();
+// $admin= new admin ();
 
 
-    $tagname=$_POST['tag'];
-    $alltgs=explode(",",$tagname);
-    print_r($alltgs);
-//     try{
- foreach($alltgs as $tag){
-     $admin->addtasg($tag);
-}
-header("location: tags.php");
+//     $tagname=$_POST['tag'];
+//     $alltgs=explode(",",$tagname);
+//     print_r($alltgs);
+// //     try{
+//  foreach($alltgs as $tag){
+//      $admin->addtasg($tag);
+// }
+// header("location: tags.php");
 
 
 //     }

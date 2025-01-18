@@ -9,9 +9,14 @@ require'../classes/admin.php';
 $admin= new admin ();
 if($_SERVER['REQUEST_METHOD']==='POST'){
 if(isset($_POST['ajoute']) && isset($_POST['tag'])){
+   
     $tagname=$_POST['tag'];
-   // $alltgs=explode(",",$tagname);
-    print_r($tagname);
+    $alltgs=explode(",",$tagname);
+    print_r($alltgs);
+//     try{
+ foreach($alltgs as $tag){
+     $admin->addtasg($tag);
+}
 //     try{
 // foreach($alltgs as $tag){
 
@@ -95,7 +100,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 </div>
             </div>
     
-            <form action="test.php" method="POST" class="form-container">
+            <form action="../admin/tags.php" method="POST" class="form-container">
                 
     
                     <div class="form-item">

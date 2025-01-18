@@ -2,10 +2,15 @@
 
 
 <?php require'../classes/admin.php';
+
 require'../classes/cour_text.php';
 require'../classes/vedio.php';
 
-echo   $_SESSION['user_id'] ;
+
+
+
+
+
 $cour_vedio= new cour_vedio();
 $cour_text=new  text_cour();
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -15,28 +20,28 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
        $description=$_POST['description'];
        $Categorieid=$_POST['categories'];
-       $tags=$_POST['tags'];
+       $tags = $_POST['tags'];
        $typecontent=$_POST['typecontent'];
        $video_url=$_POST['video_url'];
-
-$teacherid=  $_SESSION['user_id'] ;
+    
+$teacherid= $_SESSION['user_id'] ;
        $text_content=$_POST['text_content'];
        
        var_dump($tags);
 
        if($typecontent==='text'){
-        foreach( $tags as $tagid ){
-             $cour_text->addCour($tagid,$Categorieid,$title,$text_content ,$description,$teacherid);
-        }
+        
+             $cour_text->addCour($Categorieid,$title,$text_content ,$description,$teacherid,$tags);
+      
         
        
         
 
        }
        elseif ($typecontent==='vedio'){
-        foreach( $tags as $tagid ){
-            $cour_vedio->addCour($tagid,$Categorieid,$title,$video_url,$description,$teacherid);
-        }
+       
+            $cour_vedio->addCour($Categorieid,$title,$video_url,$description,$teacherid,$tags);
+        
         
        }
 
@@ -50,7 +55,7 @@ $teacherid=  $_SESSION['user_id'] ;
 
 
 }
- echo "hello";
+
 
 
 ?> <!DOCTYPE html>
@@ -61,12 +66,14 @@ $teacherid=  $_SESSION['user_id'] ;
     <title>Document</title>
    <link rel="stylesheet" href="../styleee.css">
    <link rel="stylesheet" href="../styles.css">
+
+    <link rel="stylesheet" href="../chi.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body style=" ">
     <div style="dislplay:flex">
-  
-    
+    <?php include '../side/sidebarTeacher.php';?>
+   
     <main class="main-content">
         <div class="content-wrapper">
             <div class="header">
@@ -90,7 +97,7 @@ $teacherid=  $_SESSION['user_id'] ;
     
                     <div class="form-item full-width">
                         <label for="genre" class="form-label">categorie</label>
-                        <!-- <input type="text" id="genre" name="genre" required class="form-input"> -->
+                       
                         <select name="categories" class="form-input" style="width:120vh;">
           <?php
           $categories = (new admin())->showCategorie(); 
@@ -107,21 +114,21 @@ $teacherid=  $_SESSION['user_id'] ;
                     
                    
                     <!-- tags -->
+                  
+                    
                     <div class="form-item full-width">
-                        <label for="genre" class="form-label">tags</label>
-                      
-                        <select name="tags[]" class="form-input" style="width:120vh;" >
-          <?php
-          $tags = (new admin())->showTags(); 
-    foreach ($tags as $tag):  
-    ?>
-        <option value="<?php echo htmlspecialchars($tag['tag_id']); ?>"  multiple="multiple">
-            <?php echo htmlspecialchars($tag['tag_name']); ?>
-        </option>
+    <label for="genre" class="form-label">Tags</label><div style="  overflow-y: scroll;  height:100px ">
+    <?php
+    $tags = (new admin())->showTags(); 
+    foreach ($tags as $tag):    
+    ?> 
+        <div class="checkbox-item">
+            <input type="checkbox" name="tags[]" value="<?php echo htmlspecialchars($tag['tag_id']); ?>" id="tag_<?php echo $tag['tag_id']; ?>" class="tag-checkbox">
+            <label for="tag_<?php echo $tag['tag_id']; ?>" class="tag-label"><?php echo htmlspecialchars($tag['tag_name']); ?></label>
+        </div>
        
-    <?php endforeach; ?>
-</select>
-                    </div>
+    <?php endforeach; ?> </div>
+</div>
 
 
 
@@ -157,6 +164,8 @@ $teacherid=  $_SESSION['user_id'] ;
             </form>
         </div>
     </main>
+    
+
     </div>
     
 

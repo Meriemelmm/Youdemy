@@ -17,21 +17,20 @@ CREATE TABLE Users (
 --     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 -- );
 
-CREATE TABLE Cours (
+CREATE TABLE Course (
     cours_id INT PRIMARY KEY AUTO_INCREMENT,
    cours_ title VARCHAR(255) NOT NULL,
     cours_description TEXT NOT NULL,
     text_content TEXT DEFAULT NULL ,         
     vedio_content VARCHAR(255),      
     category_id INT default NULL,
-     tag_id INT,
- 
+   
     teacher_id INT, 
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES Categories(categorie_id)ON DELETE CASCADE,
     FOREIGN KEY (teacher_id) REFERENCES users(user_id)ON DELETE CASCADE,
-     FOREIGN KEY (tag_id) REFERENCES tagss(tag_id)ON DELETE CASCADE,
+    
     
 );
 CREATE TABLE inscrit_etudiant (
@@ -49,6 +48,15 @@ CREATE TABLE Categories (
     categorie_id INT PRIMARY KEY AUTO_INCREMENT,
     categorie_name VARCHAR(150) NOT NULL UNIQUE
 );
+CREATE TABLE tag_course (
+    id INT AUTO_INCREMENT PRIMARY KEY,        
+    tag_id INT NOT NULL,                      
+    cours_id INT NOT NULL,                   
+
+    FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE,  -- Référence à la table 'tags'
+    FOREIGN KEY (course_id) REFERENCES cours(cours_id) ON DELETE CASCADE  -- Référence à la table 'cours'
+);
+
 
 
 

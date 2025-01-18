@@ -91,7 +91,7 @@ public function login($email, $password){
                 $this->username = $user['username'];
                 $this->role = $user['role'];
                 $this->status = $user['status'];
-                session_start();
+              
     
                 $_SESSION['user_id'] = $this->id;
                 $_SESSION['username'] = $this->username;
