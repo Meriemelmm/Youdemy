@@ -61,6 +61,56 @@ public function showCour($teacherId=NULL){
 
 
 
+
+public function UpdateCourse($title, $description, $categorieid, $content, $coursid, $tags) {
+    try {
+       
+        $data = [
+            ':title' => $title,
+            ':description' => $description,
+            ':categoryid' => $categorieid,
+            ':content' => $content,
+            ':coursid' => $coursid
+        ];
+
+        $Update = $this->db->prepare("UPDATE cours 
+                                      SET cours_title = :title, 
+                                          cours_description = :description, 
+                                          category_id = :categoryid, 
+                                          text_content = :content 
+                                      WHERE cours_id = :coursid");
+        $Update->execute($data);
+
+      
+        $tagsDB = $this->db->prepare("SELECT tag_id FROM tag_course WHERE cours_id = :coursid");
+        $tagsDB->execute([':coursid' => $coursid]);
+        $tagsanc = $tagsDB->fetchAll(PDO::FETCH_ASSOC);
+
+        $existeTagIds = array_column($tagsanc, 'tag_id'); 
+
+       
+        $tagsremove = array_diff($existeTagIds, $tags);
+        foreach ($tagsremove as $tagid) {
+            $removetagsdb = $this->db->prepare("DELETE   FROM tag_course WHERE cours_id = :coursid AND tag_id = :tagid");
+            $removetagsdb->execute([':coursid' => $coursid, ':tagid' => $tagid]);
+        }
+
+        
+        $tagsAdd = array_diff($tags, $existeTagIds);
+        foreach ($tagsAdd as $tag) {
+            $updateTags = $this->db->prepare("INSERT INTO tag_course (tag_id, cours_id) VALUES (:tagid, :coursid)");
+            $updateTags->execute([':tagid' => $tag, ':coursid' => $coursid]);
+        }
+
+        return true; 
+    } catch (PDOException $e) {
+       
+        return "Erreur: " . $e->getMessage();
+    }
+}
+
+
+
     }
 
 

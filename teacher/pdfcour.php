@@ -117,12 +117,8 @@ if(isset($_POST['update'])){
                         <td class="actions">
                             <div class="action-btns">
                               
-                                <form method="POST" action="../teacher/update.php?updateid=<?php echo htmlspecialchars($cour['cours_id'])?>" >
-                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
-                                <button type="submit" name="update" class="delete-btn">
-                                <i class="fas fa-edit"></i>
-                                </button>
-                            </form>
+                               
+                            <a href="../teacher/update.php?updateid=<?php echo htmlspecialchars($cour['cours_id'])?>"> <i class="fas fa-edit"></i></a>
                                 <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet cours ?');">
                                 <input type="hidden" name="cours_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
                                 <button type="submit" name="remove" class="delete-btn">

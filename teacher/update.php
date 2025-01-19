@@ -14,7 +14,8 @@ if (!isset($_SESSION['username'])) {
 
 
 require'../classes/cour.php';
-require'../classes/tag_course.php';
+require'../classes/cour_text.php';
+
    
 $cour_text=new  course();
 $courseid=$_GET['updateid']; 
@@ -22,13 +23,14 @@ if (isset($_GET['updateid'])) {
    
 $courses=$cour_text->getCourseid($courseid);
 foreach($courses as $course){
-    $title=$course['cours_title'];
-    $description=$course['cours_description'];
-    $content=$course['text_content'];
+    $titles=$course['cours_title'];
+    $descriptions=$course['cours_description'];
+    $contents=$course['text_content'];
     $categorieid=$course['category_id'];
 
 
 }
+
 
 
 } else {
@@ -37,9 +39,42 @@ foreach($courses as $course){
 $selectedTags=[];
 $tages=(new tag_course())->tags_course($courseid);
 foreach( $tages as $tag){
-   $selectedTags[]=$tag['tag_id'];
+   $selectedTags[]=$tag['tag_id'];}
    
+
+$coursed=new text_cour();
+if($_SERVER['REQUEST_METHOD']==='POST'){
+     if(isset($_POST['update'])){
+        try{
+            $title = $_POST['title']?? '';
+                      $description = $_POST['description']?? '';;
+                   $categorieid = $_POST['categories']?? '';;
+                     $content = $_POST['text_content']?? '';;
+                     $tags =$_POST['tags']?? '';;
+                
+       
+         
+
+
+$coursed->UpdateCourse($title,$description,$categorieid,$content,$courseid,$tags);
+
+header("location:../teacher/pdfcour.php");
+
+
+        }
+        catch(PDOException $e){
+            return"erreur".$e->getMessage();
+        }
+
+     }
 }
+
+
+
+
+
+
+
 
 
 
@@ -66,7 +101,7 @@ foreach( $tages as $tag){
 <body style=" ">
     <div style="dislplay:flex">
         
-<?php include '../side/sidebarTeacher.php';?>
+
    
     <main class="main-content">
         <div class="content-wrapper">
@@ -77,16 +112,17 @@ foreach( $tages as $tag){
                 </div>
             </div>
     
-            <form action="add.php" method="POST" class="form-container">
+            <form action="" method="POST" class="form-container">
                 <div class="form-grid">
                     <div class="form-item full-width">
                         <label for="title" class="form-label">Titre du cours</label>
-                        <input type="text" id="title" name="title" required class="form-input" value="<?php echo htmlspecialchars($title)?>">
+                        <input type="text" id="title" name="title" required class="form-input" value="<?php echo htmlspecialchars($titles)?>">
                     </div>
     
                     <div class="form-item full-width">
                         <label for="description" class="form-label">Description</label>
-                        <textarea id="description" name="description" rows="4" class="form-input" ><?php echo htmlspecialchars($description); ?></textarea>
+                        <textarea id="description" name="description" rows="4" class="form-input" require >
+                            <?php echo htmlspecialchars($descriptions); ?></textarea>
                     </div>
     
                     <div class="form-item full-width">
@@ -129,13 +165,19 @@ foreach( $tages as $tag){
       
     <div class="form-item full-width" id="change" >
     <label for="game_image" class="form-label">Text Content</label>
-        <textarea name="text_content" id="text_content" class="form-input"> <?php echo htmlspecialchars($content); ?></textarea>
+        <textarea name="text_content" id="text_content" class="form-input" require> <?php echo htmlspecialchars($contents); ?></textarea>
       `;       
                     </div>
                     <div class="form-item full-width" >
-                        <button type="submit" name="ajoute" class="submit-btn">
-                            Ajouter le jeu
+                        <button type="submit" name="update" class="submit-btn">
+                         
+                           update cours
                         </button>
+                        <a href="../teacher/pdfcour.php"><button type="submit" name="update" class="submit-btn">retour  </button></a>
+                           
+                         
+                      
+                        
                     </div>
                 </div>
             </form>
