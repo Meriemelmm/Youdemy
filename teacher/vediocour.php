@@ -1,10 +1,10 @@
 <?php
 
 
-session_start();
-
+require'../classes/user.php';
 
 require'../classes/vedio.php';
+require'../classes/tag_course.php';
 $teacherId=$_SESSION['user_id'];
 $course= new cour_vedio();
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -81,7 +81,14 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         <td> <?php echo htmlspecialchars($cour['categorie_name'])?></td>
                         <td>   <?php echo htmlspecialchars($cour['vedio_content']);?> 
                     </td>
-                        <td> <?php echo htmlspecialchars($cour['cours_title'])?></td>
+                    <td> <?php 
+                        $coursid=$_SESSION['cours_id']=$cour['cours_id'];
+                         $tags=(new tag_course)->tags_course($coursid);
+                         foreach ($tags as $tag) {
+                            echo htmlspecialchars($tag['tag_name']);
+                            echo "<br>"; 
+                        }
+                         ?></td>
                        
                         <td class="actions">
                             <div class="action-btns">

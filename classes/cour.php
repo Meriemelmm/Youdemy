@@ -18,8 +18,12 @@ private $categorieid;
 
  public function addCour($Categorieid, $title, $content, $description, $teacherid, $tags) {
        
-    
-   $data = [
+     $user=$this->db->prepare("SELECT compte_status FROM users WHERE user_id=:teacherid");
+     $user->execute([":teacherid"=>$teacherid]);
+     $teacher=$user->fetch();
+
+     if($teacher['compte_status']==='accepted'){
+       $data = [
       ':categorieid' => $Categorieid,
       ':title' => $title,
       ':description' => $description,
@@ -30,7 +34,7 @@ private $categorieid;
   $cour = $this->db->prepare("INSERT INTO cours (category_id, cours_title, cours_description, teacher_id, text_content)
                                     VALUES (:categorieid, :title, :description, :teacherid)");
 
-  $cour>execute($data);  
+  $cour->execute($data);  
   $coursd = $this->db->lastInsertId();  
 
  
@@ -38,7 +42,12 @@ private $categorieid;
       $tag = $this->db->prepare("INSERT INTO tag_course (tag_id, cours_id) VALUES (:tagid, :coursid)");
       $tag->execute([":tagid" => $tagid, ":coursid" => $coursd]);  
   }
-
+  return true;
+     }
+     else {
+      return false ;
+     }
+  
   
    
 }

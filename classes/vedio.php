@@ -7,8 +7,12 @@ class cour_vedio extends course{
     }
 
 public function addCour($Categorieid, $title, $content, $description, $teacherid, $tags) {
-   
-    $data = [
+    $user=$this->db->prepare("SELECT compte_status FROM users WHERE user_id=:teacherid");
+     $user->execute([":teacherid"=>$teacherid]);
+     $teacher=$user->fetch();
+
+     if($teacher['compte_status']==='accepted'){
+        $data = [
         ':categorieid' => $Categorieid,
         ':title' => $title,
         ':description' => $description,
@@ -27,6 +31,12 @@ public function addCour($Categorieid, $title, $content, $description, $teacherid
         $tag = $this->db->prepare("INSERT INTO tag_course (tag_id, cours_id) VALUES (:tagid,:coursid)");
         $tag->execute([":tagid" => $tagid,":coursid" => $coursd]);  
     }
+    return true;
+     }
+     else{
+        return false;
+     }
+    
 }
 // show vedio_cour
 public function showCour($teacherId){

@@ -1,5 +1,6 @@
 <?php 
 include_once '../classes/cour.php';
+include_once '../classes/tag_course.php';
 class text_cour extends course{
     private $content;
     public function __construct() {
@@ -8,7 +9,11 @@ class text_cour extends course{
    
 
     public function addCour($Categorieid, $title, $content, $description, $teacherid, $tags) {
-       
+        $user=$this->db->prepare("SELECT compte_status FROM users WHERE user_id=:teacherid");
+     $user->execute([":teacherid"=>$teacherid]);
+     $teacher=$user->fetch();
+
+     if($teacher['compte_status']==='accepted'){
         $data = [
             ':categorieid' => $Categorieid,
             ':title' => $title,
@@ -21,13 +26,20 @@ class text_cour extends course{
                                           VALUES (:categorieid,:title,:description,:teacherid,:content)");
     
         $cour->execute($data);  
-        $coursd = $this->db->lastInsertId();  
+        $coursd = $this->db->lastInsertId();
+        $this->courdid=$_SESSION['cours_id']= $coursd;
     
        
         foreach ($tags as $tagid) {
             $tag = $this->db->prepare("INSERT INTO tag_course (tag_id, cours_id) VALUES (:tagid, :coursid)");
             $tag->execute([":tagid" => $tagid, ":coursid" => $coursd]);  
         }
+        return true;
+     }
+     else {
+        return false ;
+     }
+        
     }
 //    afiche text_cour
 public function showCour($teacherId){

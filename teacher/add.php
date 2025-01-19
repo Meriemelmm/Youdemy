@@ -5,6 +5,12 @@
 
 require'../classes/cour_text.php';
 require'../classes/vedio.php';
+var_dump($_SESSION['username']);
+
+if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
 
 
 
