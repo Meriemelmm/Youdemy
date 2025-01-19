@@ -39,7 +39,7 @@ public function addCour($Categorieid, $title, $content, $description, $teacherid
     
 }
 // show vedio_cour
-public function showCour($teacherId){
+public function showCour($teacherId=NULL){
     try{$data=[':teacherid'=>$teacherId];
     $cours=$this->db->prepare("SELECT cours.cours_title,cours.cours_id,cours.cours_description,cours.text_content,
     cours.vedio_content,categories.categorie_id,users.user_id,categories.categorie_name FROM cours

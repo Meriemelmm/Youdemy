@@ -29,10 +29,15 @@
                 </div>
                 <div class="nav-item">
                 <p class="section-title">Gestion content</p>
-                    <a href="../admin/cours.php" class="nav-link">
+                    <a href="../admin/cours_pdf.php" class="nav-link">
                         <i class="fas fa-book"></i>
                        
-                        <span>Gérer les cours</span>
+                        <span> les cours pdf</span>
+                    </a>
+                    <a href="../admin/cours_ved.php" class="nav-link">
+                    <i class="fas fa-video"></i>
+                       
+                        <span> les cours vedios</span>
                     </a>
                     <a href="../admin/tags.php" class="nav-link">
                     <i class="fas fa-tags"></i>

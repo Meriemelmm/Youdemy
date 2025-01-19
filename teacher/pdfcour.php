@@ -21,6 +21,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
        
     }
 }
+if(isset($_POST['update'])){
+    
+}
 
                       
 
@@ -114,9 +117,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         <td class="actions">
                             <div class="action-btns">
                               
-                                <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
+                                <form method="POST" action="../teacher/update.php?updateid=<?php echo htmlspecialchars($cour['cours_id'])?>" >
                                 <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
-                                <button type="submit" name="delete" class="delete-btn">
+                                <button type="submit" name="update" class="delete-btn">
                                 <i class="fas fa-edit"></i>
                                 </button>
                             </form>
@@ -126,7 +129,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-                               
+                            
                             </div>
                         </td>
                     </tr>
@@ -138,7 +141,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         </div>
     </div>
 </main>
-
+<!-- echo ($cour['category_id'] == $category['category_id']) ? 'selected' : ''; -->
 
 </body>
 </html>

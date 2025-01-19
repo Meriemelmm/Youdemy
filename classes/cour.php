@@ -52,13 +52,13 @@ private $categorieid;
    
 }
 // afiche 
-public function showCour($teacherId){
-   try{$data=[':teacherid'=>$teacherId];
+public function showCour($teacherId= NULL){
+   try{
    $cours=$this->db->prepare("SELECT cours.cours_title,cours.cours_id,cours.cours_description,cours.text_content,
-   cours.vedio_content,categories.categorie_id,users.user_id,categories.categorie_name FROM cours
+   cours.vedio_content,categories.categorie_id,users.user_id,categories.categorie_name,users.username FROM cours
    JOIN categories ON categories.categorie_id=cours.category_id JOIN users ON
     cours.teacher_id=users.user_id WHERE cours.vedio_content IS NULL OR  cours.text_content IS NULL");
-   $cours->execute($data);
+   $cours->execute();
    return $cours->fetchALL(PDO::FETCH_ASSOC);
 
    }
@@ -70,9 +70,35 @@ public function showCour($teacherId){
 }
 //  removeCour
 public function removeCour($coursid){
+
+
+   try{
    $remove= $this->db->prepare("DELETE  FROM cours WHERE cours_id=:coursid");
    return $remove->execute([":coursid"=>$coursid]);
+
+   }
+   catch(PDOException $e){
+      echo " ereur".$e->getMessage();
+
+   }
+
 }
+public function getCourseid($courseid) {
+   try{
+       $course = $this->db->prepare("SELECT * FROM cours WHERE cours_id = :courseid");
+   $course->execute([':courseid' => $courseid]);
+    return $result = $course->fetchALL();
+   }
+  catch(PDOException $e){
+   return" erruer".$e->getMessage();
+
+  }
+   
+}
+
+
+
+
 
 
 

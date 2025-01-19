@@ -123,14 +123,14 @@ $teacherid= $_SESSION['user_id'] ;
                   
                     
                     <div class="form-item full-width">
-    <label for="genre" class="form-label">Tags</label><div style="  overflow-y: scroll;  height:100px ">
+    <label for="genre" class="form-label">Tags</label><div style="overflow-y: scroll;  height:100px ">
     <?php
     $tags = (new admin())->showTags(); 
     foreach ($tags as $tag):    
     ?> 
         <div class="checkbox-item">
             <input type="checkbox" name="tags[]" value="<?php echo htmlspecialchars($tag['tag_id']); ?>" id="tag_<?php echo $tag['tag_id']; ?>" class="tag-checkbox">
-            <label for="tag_<?php echo $tag['tag_id']; ?>" class="tag-label"><?php echo htmlspecialchars($tag['tag_name']); ?></label>
+            <label for="" class="tag-label"><?php echo htmlspecialchars($tag['tag_name']); ?></label>
         </div>
        
     <?php endforeach; ?> </div>
