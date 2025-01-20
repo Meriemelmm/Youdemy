@@ -1,6 +1,24 @@
  <?php
                   
-       require('../classes/teacher.php');       
+       require('../classes/teacher.php');  
+       
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   ?>
                   
                   
@@ -35,31 +53,35 @@
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
-        <?php    $teacher=new teacher();
-        $teacherid=$_SESSION['user_id'];
-        echo  $teacherid;
-        $etudiants=$teacher->ListeInscrit($teacherid) ; 
-        print_r( $etudiants) ;
-        foreach( $etudiants as $etudiant) :?>
- <h2> <?php echo htmlspecialchars($etudiant['cours_title']);?> </h2>
+       
+       
+ <h2> </h2>
         <div class="user-table">
             <table>
                 <thead>
-                    <tr>
-                        <th>username</th>
+                    <tr> <th>titre de cours ></th>
+                        <th>username></th>
                         <th>email</th>
                         <th>isncrit_at</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                  
+                <?php    $teacher=new teacher();
+        $teacherid=$_SESSION['user_id'];
+        echo  $teacherid;
+        $count=$teacher-> CountCourses($teacherid);
+        echo"cours". $count;
+        echo"nb_inscrit". $teacher->NB_inscrit($teacherid);
+        $etudiants=$teacher->ListeInscrit($teacherid) ; 
+       
+        foreach( $etudiants as $etudiant) :?>
                     <tr>
-                        <td><?php echo htmlspecialchars($etudiant['username']);?></td>
-                        <td><?php echo htmlspecialchars($etudiant['email']);?></td>
+                    <td><?php echo htmlspecialchars($etudiant['cours_title']);?> </td>
+                        <td><?php echo htmlspecialchars($etudiant['username']);?> </td>
+                        <td><?php echo htmlspecialchars($etudiant['email']);?> </td>
                         <td>
                             <span >
-                               wa7d lwa9t 
                             </span>
                         </td>
                         <td class="actions">
@@ -71,12 +93,12 @@
                             </form>
                         </td>
                     </tr>
-                  
+                     <?php endforeach;?>
                 </tbody>
             </table>
         </div>
 
-         <?php endforeach;?>
+      
     </div>
 </main>
 
