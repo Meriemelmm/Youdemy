@@ -69,10 +69,10 @@
                 <tbody>
                 <?php    $teacher=new teacher();
         $teacherid=$_SESSION['user_id'];
-        echo  $teacherid;
-        $count=$teacher-> CountCourses($teacherid);
-        echo"cours". $count;
-        echo"nb_inscrit". $teacher->NB_inscrit($teacherid);
+        
+        // $count=$teacher-> CountCourses($teacherid);
+        // echo"cours". $count;
+        // echo"nb_inscrit". $teacher->NB_inscrit($teacherid);
         $etudiants=$teacher->ListeInscrit($teacherid) ; 
        
         foreach( $etudiants as $etudiant) :?>
@@ -102,6 +102,6 @@
     </div>
 </main>
 
-    
+
 </body>
 </html>

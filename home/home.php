@@ -86,21 +86,24 @@ if(isset($_POST['isncrit'])){
             color: black;
             padding: 20px 0;
             height: 100px;
+        
         }
 
         header nav {
             display: flex;
             justify-content: space-between;
+           
             align-items: center;
-            padding: 0 20px;
+            padding: 0 60px;
         }
 
-        header .logo h1 {
+        /* header .logo h1 {
             font-size: 1.8em;
             font-size: larger;
-            background: linear-gradient(135deg, #0000ff, #87ceeb);
+           color:blue;
+          
            
-        }
+        } */
 
         header ul.menu {
             display: flex;
@@ -108,8 +111,8 @@ if(isset($_POST['isncrit'])){
         }
 
         header ul.menu li a {
-            color: black;
-            font-size: 1.1em;
+            color:rgb(15, 4, 44);
+            font-size: 1.6em;
         }
 
         header ul.menu li a:hover {
@@ -146,7 +149,7 @@ if(isset($_POST['isncrit'])){
         /* Cours Populaires */
         .cours-populaires {
             padding: 60px 20px;
-            background-color:rgb(25, 35, 165) ;
+            background-color:white ;
             text-align: center;
         }
 
@@ -163,15 +166,17 @@ if(isset($_POST['isncrit'])){
         }
 
         .cours-card {
+          
            
             width: 350px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(181, 194, 165, 0.1);
             border-radius: 8px;
+           
             overflow: hidden;
             transition: transform 0.3s ease;
             text-align: center;
             padding: 20px;
-            background-color:white ;
+            background-color: hsla(186, 43.00%, 64.90%, 0.10);
         }
 
         .cours-card:hover {
@@ -273,9 +278,77 @@ if(isset($_POST['isncrit'])){
                 font-size: 1.1em;
             }
         }
+       
+/* Basic reset for margin/padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling for the header and navigation */
+header {
+   /* Dark background */
+    color: #fff;            /* White text */
+    padding: 20px 10%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo styling */
+
+.logo h1 {
+    font-size: 2.5em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color:rgb(15, 4, 44);
+   
+    letter-spacing: 3px;
+    margin: 0;
+    display: flex;
+    align-items: center; 
+}
+
+
+.logo h1 i {
+    margin-right:05px;
+    font-size: 1.2em;    
+    color:rgb(201, 110, 12);  
+    color:#f26b38;   
+}
+
+/* Menu styling */
+
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .menu li {
+        margin: 10px 0;
+    }
+}
+
     </style>
    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <head>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
 
 
 </head>
@@ -285,13 +358,13 @@ if(isset($_POST['isncrit'])){
     <header>
         <nav>
             <div class="logo">
-                <h1>Youdemy</h1>
+            <h1><i class="fas fa-graduation-cap"></i> YOUDEMY</h1>
             </div>
             <ul class="menu">
                 <li><a href="../home/home.php">Accueil</a></li>
-                <li><a href="#">Cours</a></li>
-                <li><a href="#">Catégories</a></li>
-                <li><a href="#">Connexion</a></li>
+              
+                <li><a href="#">sign up</a></li>
+                <li><a href="#">login</a></li>
                 <li><a href="../home/mescourses.php#">Mes courses</a></li>
             </ul>
         </nav>

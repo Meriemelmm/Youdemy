@@ -1,11 +1,18 @@
 
 <?php
  
-//   require '../classes/user.php';
-//   if (!isset($_SESSION['username'])) {
-//       header('Location: ../auth/login.php');
-//       exit();
-//   }
+ 
+require'../classes/admin.php';
+$admin= new admin();
+$nb_total=$admin->nb_total_cours();
+$max=$admin->course_with_more_isncrit();
+
+
+    if (!isset($_SESSION['username'])) {
+      header('Location: ../auth/login.php');
+      exit();
+  } 
+
 
 
 
@@ -107,11 +114,11 @@
             <section class="content">
                 <div class="card">
                     <h3>Nombre total de cours</h3>
-                    <p>150</p>
+                    <p><?php  echo htmlspecialchars($nb_total)  ?></p>
                 </div>
                 <div class="card">
                     <h3> Le cour avec le plus d' étudiants</h3>
-                    <p>80</p>
+                    <p><?php  echo htmlspecialchars($max)  ?></p>
                 </div>
                 <div class="card">
                     <h3> Les Top 3 enseignants</h3>

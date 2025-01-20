@@ -57,12 +57,43 @@ public function CountCourses($teacherid){
 
 }
 public function  NB_inscrit($teacherid){
-    $nb_inscrit=$this->db->prepare("SELECT  COUNT ( inscrit_id) AS nb_inscrit FROM inscrit_etudiant  WHERE teacher_id=:teacherid");
-    $nb_inscrit->execute(['teacherid'=>$teacherid]);
-     $inscrits=$nb_inscrit->fetch();
-    return  $inscrits['nb_inscrit'];
+    try{
+    $count = $this->db->prepare("SELECT COUNT(inscrit_id) AS nb_inscrit 
+    FROM inscrit_etudiant 
+    WHERE teacher_id = :teacherid");
+
+ 
+ $count->execute([':teacherid' => $teacherid]); 
+  $nb_course=$count->fetch();
+   return $nb_course['nb_inscrit'];
+ 
+     
+    }
+    catch(PDOException $e){
+        echo "erreur".$e->getMessage();
+    }
 
 
+}
+public function inscrit_par_course($teacherid){
+
+    try{
+        $count = $this->db->prepare("SELECT  cours.cours_title,COUNT(inscrit_id) AS nb_inscrit 
+        FROM inscrit_etudiant JOIN cours ON inscrit_etudiant.cours_id=cours.cours_id 
+        WHERE inscrit_etudiant.teacher_id = :teacherid GROUP BY cours.cours_title");
+    
+     
+     $count->execute([':teacherid' => $teacherid]); 
+       return $nb_course=$count->fetchAll( PDO::FETCH_ASSOC);
+      
+     
+         
+        }
+        catch(PDOException $e){
+            echo "erreur".$e->getMessage();
+        }
+    
+    
 }
 
 

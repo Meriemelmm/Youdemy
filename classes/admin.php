@@ -122,6 +122,34 @@ catch(PDOException $e){
                
                
                            }
+                            public function nb_total_cours(){
+                                try{
+                                      $nb_total=$this->db->prepare("SELECT COUNT(cours_id)AS nb_total FROM cours ");
+                            $nb_total->execute();
+                            $total=$nb_total->fetch(PDO::FETCH_ASSOC);
+                            return  $total['nb_total'];
+                                }
+                                catch(PDOException $e){
+                                     echo" erreur".$e->getMessage();
+
+                                }
+                          
+
+                           }
+                            public function course_with_more_isncrit(){
+                                $moreinscrit=$this->db->prepare(" SELECT cours.cours_title, cours.cours_id, 
+                                 count(cours.cours_id) AS nb_course  
+                                FROM inscrit_etudiant JOIN   cours ON cours.cours_id=inscrit_etudiant.cours_id  GROUP BY cours.cours_title  
+                                  ORDER BY nb_course DESC  LIMIT 1");
+                                 $moreinscrit->execute();
+                               $title= $moreinscrit->fetch(PDO::FETCH_ASSOC);
+                                 return   $title['cours_title'];
+                                
+
+                            }
+
+                      
+                        
 
         }
 
