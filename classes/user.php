@@ -105,7 +105,7 @@ public function login($email, $password){
                         header("Location: ../teacher/add.php");
                         exit();
                     case 'Etudiant':
-                        echo "Vous êtes un étudiant.";
+                        header("Location: ../home/home.php");
                         exit();
                     default:
                         echo "Rôle inconnu.";

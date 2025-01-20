@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+ <?php
+                  
+       require('../classes/teacher.php');       
+                  ?>
+                  
+                  
+                  
+                  
+                  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,13 +35,19 @@
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
-
+        <?php    $teacher=new teacher();
+        $teacherid=$_SESSION['user_id'];
+        echo  $teacherid;
+        $etudiants=$teacher->ListeInscrit($teacherid) ; 
+        print_r( $etudiants) ;
+        foreach( $etudiants as $etudiant) :?>
+ <h2> <?php echo htmlspecialchars($etudiant['cours_title']);?> </h2>
         <div class="user-table">
             <table>
                 <thead>
                     <tr>
-                        <th>Utilisateur</th>
-                        <th>cours</th>
+                        <th>username</th>
+                        <th>email</th>
                         <th>isncrit_at</th>
                         <th>Actions</th>
                     </tr>
@@ -41,11 +55,11 @@
                 <tbody>
                   
                     <tr>
-                        <td>dbbsqs</td>
-                        <td>bdshjsdbqdsqdh</td>
+                        <td><?php echo htmlspecialchars($etudiant['username']);?></td>
+                        <td><?php echo htmlspecialchars($etudiant['email']);?></td>
                         <td>
                             <span >
-                               sbdjbbsfbfsbhfbh
+                               wa7d lwa9t 
                             </span>
                         </td>
                         <td class="actions">
@@ -61,6 +75,8 @@
                 </tbody>
             </table>
         </div>
+
+         <?php endforeach;?>
     </div>
 </main>
 

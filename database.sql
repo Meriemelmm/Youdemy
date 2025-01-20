@@ -37,7 +37,8 @@ CREATE TABLE inscrit_etudiant (
     inscrit_id INT AUTO_INCREMENT PRIMARY KEY,
     etudiant_id INT,
     cours_id INT,
-    FOREIGN KEY (etudiant_id) REFERENCES users (user_id) ON DELETE CASCADE,
+    teacher_id INT,
+    FOREIGN KEY (etudiant_id) REFERENCES users (user_id) ON DELETE CASCADE, FOREIGN KEY (teacher_id) REFERENCES users (user_id) ON DELETE CASCADE,
     FOREIGN KEY (cours_id) REFERENCES cours(cours_id) ON DELETE CASCADE
 );
 CREATE TABLE Tags (
