@@ -85,9 +85,25 @@ public function removeCour($coursid){
 }
 public function getCourseid($courseid) {
    try{
-       $course = $this->db->prepare("SELECT * FROM cours WHERE cours_id = :courseid");
+       $course = $this->db->prepare("SELECT *FROM cours WHERE cours_id = :courseid");
    $course->execute([':courseid' => $courseid]);
     return $result = $course->fetchALL();
+   }
+  catch(PDOException $e){
+   return" erruer".$e->getMessage();
+
+  }
+   
+}
+public function gettedCourse($courseid) {
+   try{
+       $course = $this->db->prepare("SELECT  cours.cours_title,cours.cours_description,
+       categories.categorie_id,categories.categorie_name, cours.text_content,cours.vedio_content,
+       users.user_id,users.username FROM cours JOIN categories  ON categories.categorie_id=cours.category_id 
+       JOIN users ON users.user_id=cours.teacher_id  WHERE cours_id = :courseid");
+   $course->execute([':courseid' => $courseid]);
+    return $result = $course->fetchALL();
+    
    }
   catch(PDOException $e){
    return" erruer".$e->getMessage();

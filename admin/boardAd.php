@@ -6,7 +6,10 @@ require'../classes/admin.php';
 $admin= new admin();
 $nb_total=$admin->nb_total_cours();
 $max=$admin->course_with_more_isncrit();
-
+$top= $admin->top_3_teacher();
+echo "<pre>";
+print_r($top);
+echo "</pre>";
 
     if (!isset($_SESSION['username'])) {
       header('Location: ../auth/login.php');
@@ -100,7 +103,8 @@ $max=$admin->course_with_more_isncrit();
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<?php include '../side/sideAdmin.php';?>
+    <?php include '../side/sideAdmin.php';?>
+
     <main class="main-content">
             <!-- En-tête -->
             <header class="header">
@@ -121,11 +125,11 @@ $max=$admin->course_with_more_isncrit();
                     <p><?php  echo htmlspecialchars($max)  ?></p>
                 </div>
                 <div class="card">
+                      
                     <h3> Les Top 3 enseignants</h3>
-                    <p>meriem el mecaniqui</p>
-                    <p>ourda el mecaniqui</p>
-                    <p>douae el mecaniqui</p>
-                </div>
+                    <?php foreach($top as $teacher) :   ?>
+                    <p ><?php echo  $teacher['username']  ?></p>
+                    <?php endforeach;?> 
             </section>
         </main>
 </body>

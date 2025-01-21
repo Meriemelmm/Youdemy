@@ -124,7 +124,7 @@ catch(PDOException $e){
                            }
                             public function nb_total_cours(){
                                 try{
-                                      $nb_total=$this->db->prepare("SELECT COUNT(cours_id)AS nb_total FROM cours ");
+                     $nb_total=$this->db->prepare("SELECT COUNT(cours_id)AS nb_total FROM cours ");
                             $nb_total->execute();
                             $total=$nb_total->fetch(PDO::FETCH_ASSOC);
                             return  $total['nb_total'];
@@ -147,6 +147,24 @@ catch(PDOException $e){
                                 
 
                             }
+                            public function top_3_teacher(){
+                                $top=$this->db->prepare(" SELECT  count(cours.cours_id)  AS  nb_inscrit,
+                               users.username,users.user_id FROM inscrit_etudiant JOIN
+                                 cours ON cours.cours_id=inscrit_etudiant.cours_id JOIN  users 
+                                 ON users.user_id=inscrit_etudiant.teacher_id  GROUP BY inscrit_etudiant.teacher_id   ORDER BY nb_inscrit DESC LIMIT 3");
+             
+             $top->execute();
+              return $top->fetchAll( PDO::FETCH_ASSOC);
+             
+             
+             
+             
+             
+             
+             
+             
+             
+                                 }
 
                       
                         

@@ -392,7 +392,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] === "Etudiant") {
                     <span>JavaScript</span> -->
                 </div>
                 <div style="display:flex; gap:20px">
-                <a href="#" class="btn">Plus pxdétails</a>
+                <a href="../home/details.php?detail=<?php echo htmlspecialchars($coursid);?>"
+                 class="btn">Plus pxdétails</a>
           <form method="POST" onsubmit="return confirm('Voulez-vous vraiment inscrit dans ce cours  ?');">
                                 <input type="hidden" name="cours_id" value="<?php echo htmlspecialchars($coursid);?>">
                                 <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($course['user_id']);?>">
