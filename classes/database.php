@@ -11,7 +11,6 @@ public function __construct() {
    
    try{
      $this->db = new PDO("mysql:host=" .$this->namehost.";dbname=". $this->dbname,$this->user,$this->pass);
-     echo" nice";
    }
    catch(PDOException $e){
     return "erreur est :" .$e->getMessage();
