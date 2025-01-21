@@ -1,5 +1,5 @@
 <?php 
- require '../classes/user.php';
+ require '../classes/admin.php';
  require'../classes/cour.php';
  require'../classes/tag_course.php';
 
@@ -7,6 +7,7 @@
 
 
  $course= new course();
+
 
  if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['remove']) && isset($_POST['cours_id'])){
@@ -21,6 +22,8 @@
        
     }
 }
+$admin= new admin();
+$categories =$admin ->showCategorie();
 
 
 
@@ -34,6 +37,50 @@
     <title>Document</title>
     <link rel="stylesheet" href="../styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style> label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        select {
+            width: 40%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fafafa;
+            font-size: 16px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+            background-color: #e9f1fb;
+        }
+
+        option {
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }</style>
 </head>
 <body>
 <?php include '../side/sideAdmin.php';?>
@@ -48,6 +95,17 @@
             </div>
            
         </div>
+       
+        <label for="choix">Choisissez une categorie :</label>
+        <select id="choix" name="choix">
+            <?php  foreach($categories as $categorie):?>
+            <option value="<?php echo htmlspecialchars($categorie['categorie_name'])?>"><?php echo htmlspecialchars($categorie['categorie_name'])?></option>
+          
+            <?php endforeach;?>
+        </select><br><br>
+        
+      
+  
 
         <div class="courses-table">
             <table>

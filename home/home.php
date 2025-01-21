@@ -62,12 +62,12 @@ if(isset($_POST['isncrit'])){
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box;font-family: 'Arial', sans-serif;
         }
         
         /* Styles de base */
         body {
-            font-family: Arial, sans-serif;
+           
             background-color: white;
             margin: 0;
             padding: 0;
@@ -107,12 +107,15 @@ if(isset($_POST['isncrit'])){
 
         header ul.menu {
             display: flex;
-            gap: 20px;
+            gap: 12px;
         }
 
         header ul.menu li a {
             color:rgb(15, 4, 44);
-            font-size: 1.6em;
+            font-size: 1.6em; font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color:rgb(15, 4, 44);
+           
         }
 
         header ul.menu li a:hover {
@@ -259,25 +262,7 @@ if(isset($_POST['isncrit'])){
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .cours-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            header ul.menu {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .hero h2 {
-                font-size: 2em;
-            }
-
-            .hero p {
-                font-size: 1.1em;
-            }
-        }
+      
        
 /* Basic reset for margin/padding */
 * {
@@ -362,10 +347,16 @@ nav {
             </div>
             <ul class="menu">
                 <li><a href="../home/home.php">Accueil</a></li>
+                <?php 
+if (isset($_SESSION['user_id']) && $_SESSION['role'] === "Etudiant") {
+    echo '<li><a href="../home/mescourses.php">Mes courses</a></li>';
+}
+?>
+
               
                 <li><a href="#">sign up</a></li>
                 <li><a href="#">login</a></li>
-                <li><a href="../home/mescourses.php#">Mes courses</a></li>
+               
             </ul>
         </nav>
     </header>
