@@ -3,6 +3,7 @@ include_once '../classes/cour.php';
 include_once '../classes/tag_course.php';
 class text_cour extends course{
     private $content;
+
     public function __construct() {
          parent::  __construct() ;
     }
@@ -27,7 +28,7 @@ class text_cour extends course{
     
         $cour->execute($data);  
         $coursd = $this->db->lastInsertId();
-        $this->courdid=$_SESSION['cours_id']= $coursd;
+        
     
        
         foreach ($tags as $tagid) {

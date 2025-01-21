@@ -5,7 +5,9 @@
 
 <aside class="sidebar">
         <div class="sidebar-header">
-            <h1 class="title">Youdemy</h1>
+        <div class="logo">
+                <h1><i class="fas fa-graduation-cap"></i> YOUDEMY</h1>
+            </div>
             <p class="subtitle">teacher</p>
         </div>
     
@@ -49,7 +51,7 @@
                 <div class="nav-item">
                     <a href="../teacher/listes.php" class="nav-link">
                         <i class="fas fa-users"></i>
-                        <span>Liste utilisateurs</span>
+                        <span>Liste Etudiants </span>
                     </a>
                 </div>
                 
@@ -58,9 +60,9 @@
     
         <div class="sidebar-footer">
             <div class="user-info">
-                <img src="https://api.dicebear.com/6.x/initials/svg?seed=JohnDoe" class="user-avatar">
+                <img src="https://api.dicebear.com/6.x/initials/svg?seed=<?php echo htmlspecialchars($_SESSION['username'])?>" class="user-avatar">
                 <div>
-                    <p class="user-name"></p>
+                    <p class="user-name"> <?php echo htmlspecialchars($_SESSION['username']) ?></p>
                     <p class="user-role">Teacher</p>
                 </div>
             </div>

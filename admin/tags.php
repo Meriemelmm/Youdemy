@@ -1,7 +1,7 @@
 <?php
 
 require'../classes/admin.php';
-
+require'../classes/tags.php';
 if (!isset($_SESSION['username'])) {
     header('Location: ../auth/login.php');
     exit();
@@ -17,17 +17,7 @@ if(isset($_POST['ajoute']) && isset($_POST['tag'])){
  foreach($alltgs as $tag){
      $admin->addtasg($tag);
 }
-//     try{
-// foreach($alltgs as $tag){
 
-//      $admin->addtasg($tag);
-// }
-
-
-//     }
-//     catch(PDOException $e){
-//         echo " erreur".$e->getMessage();
-//     }
 }
 
 
@@ -144,7 +134,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                     </tr>
                 </thead>
                 <tbody>
-               <?php $tags=$admin->showTags();
+                    
+               <?php 
+               $tags=( new tags ())->showTags();
                foreach($tags as $tag)   :  ?>
                    
                     <tr>

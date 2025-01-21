@@ -260,7 +260,25 @@ td {
     color: #e2e8f0;
 }
 
+.logo h1 {
+    font-size: 2.5em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: rgb(15, 4, 44);
 
+    letter-spacing: 3px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+
+.logo h1 i {
+    margin-right: 05px;
+    font-size: 1.2em;
+    color: rgb(201, 110, 12);
+    color: #f26b38;
+}
 
 
 /* Actions */

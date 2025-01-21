@@ -5,8 +5,10 @@ session_start();
 
 
 require'../classes/cour_text.php';
+require'../classes/tags.php';
 $teacherId=$_SESSION['user_id'];
 $course= new text_cour();
+
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['remove']) && isset($_POST['cours_id'])){

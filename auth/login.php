@@ -12,10 +12,10 @@ try{
     $connect=$_POST['connecter'];
     if(isset($email) && isset($password)&&isset($connect)){
     if($result=$user->login($email,$password) ) {
-        echo" do oit ";
+        return true;
     }
     else{
-        echo" yuk";
+        return false;
     }
     }
 }
@@ -126,6 +126,7 @@ catch(PDOException $e){
             width: 100%;
             padding: 12px;
             background-color:#121125;
+            background-color: #2c3e50;
             color: white;
             font-size: 16px;
             border: none;
@@ -135,7 +136,7 @@ catch(PDOException $e){
         }
         
         button:hover {
-            background-color: #f39c12;
+            background-color: #f26b38;
         }
         
         /* Style du footer */
@@ -147,22 +148,13 @@ catch(PDOException $e){
             position: fixed;
             bottom: 0;
             width: 100%;
-        }</style>
+        }
+        </style>
 </head>
 <body>
-    <!-- <header>
-        <div class="container">
-            <h1>BlogPress</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="signup.php">Inscription</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
-
+   
     <main>
+    
         <section class="form-container">
             <h2>Connexion</h2>
             <form action="" method="POST">

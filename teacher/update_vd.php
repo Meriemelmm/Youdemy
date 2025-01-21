@@ -4,6 +4,7 @@ require'../classes/tags.php';
 
 
 
+
 if (!isset($_SESSION['username'])) {
     header('Location: ../auth/login.php');
     exit();
@@ -13,8 +14,9 @@ if (!isset($_SESSION['username'])) {
 
 
 
-require'../classes/cour.php';
-require'../classes/cour_text.php';
+
+require'../classes/tag_course.php';
+require'../classes/vedio.php';
 
    
 $cour_text=new  course();
@@ -25,7 +27,7 @@ $courses=$cour_text->getCourseid($courseid);
 foreach($courses as $course){
     $titles=$course['cours_title'];
     $descriptions=$course['cours_description'];
-    $contents=$course['text_content'];
+    $contents=$course['vedio_content'];
     $categorieid=$course['category_id'];
 
 
@@ -42,32 +44,32 @@ foreach( $tages as $tag){
    $selectedTags[]=$tag['tag_id'];}
    
 
-$coursed=new text_cour();
-if($_SERVER['REQUEST_METHOD']==='POST'){
-     if(isset($_POST['update'])){
-        try{
-            $title = $_POST['title']?? '';
-                      $description = $_POST['description']?? '';;
-                   $categorieid = $_POST['categories']?? '';;
-                     $content = $_POST['text_content']?? '';;
-                     $tags =$_POST['tags']?? '';;
-                
-       
-         
-
-
-$coursed->UpdateCourse($title,$description,$categorieid,$content,$courseid,$tags);
-
-header("location:../teacher/pdfcour.php");
-
-
+   $coursed=new cour_vedio();
+   if($_SERVER['REQUEST_METHOD']==='POST'){
+        if(isset($_POST['update'])){
+           try{
+               $title = $_POST['title']?? '';
+                         $description = $_POST['description']?? '';;
+                      $categorieid = $_POST['categories']?? '';;
+                        $content = $_POST['video_url']?? '';;
+                        $tags =$_POST['tags']?? '';;
+                   
+          
+            
+   
+   
+   $coursed->UpdateCourse($title,$description,$categorieid,$content,$courseid,$tags);
+   
+   header("location:../teacher/vediocour.php");
+   
+   
+           }
+           catch(PDOException $e){
+               return"erreur".$e->getMessage();
+           }
+   
         }
-        catch(PDOException $e){
-            return"erreur".$e->getMessage();
-        }
-
-     }
-}
+   }
 
 
 
@@ -164,8 +166,9 @@ header("location:../teacher/pdfcour.php");
 </div>
       
     <div class="form-item full-width" id="change" >
-    <label for="game_image" class="form-label">Text Content</label>
-        <textarea name="text_content" id="text_content" class="form-input" require> <?php echo htmlspecialchars($contents); ?></textarea>
+       
+    <label for="game_image" class="form-label">Video URL</label>
+    <input type="url" id="video_url" name="video_url" class="form-input" value="<?php echo htmlspecialchars($contents); ?>">
       `;       
                     </div>
                     <div class="form-item full-width" >
@@ -173,7 +176,7 @@ header("location:../teacher/pdfcour.php");
                          
                            update cours
                         </button>
-                        <a href="../teacher/pdfcour.php"><button type="submit" name="update" class="submit-btn">retour  </button></a>
+                        <a href="../teacher/vediocour.php"><button type="submit" name="update" class="submit-btn">retour  </button></a>
                            
                          
                       

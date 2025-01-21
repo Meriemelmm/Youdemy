@@ -12,21 +12,27 @@ private $status;
 protected $db;
 
 
+
 public function __construct() {
    $this->db=(new database())->getconnect();
+   
        
 
 }
+
 // gttrs
-public function getusername(){  return $this->username;}
-public function getemaill(){  return $this->email;}
-public function getpassword(){  return $this->password;}
-public function gtrole(){  return $this->role;}
-public function getstatus(){  return $this->status;}
+public function getUsername(){  return $this->username;}
+public function getEmaill(){  return $this->email;}
+public function getPassword(){  return $this->password;}
+public function gtRole(){  return $this->role;}
+public function getStatus(){  return $this->status;}
 //  sign up 
 public function signUp($username,$email,$password,$role){
 
-    try{
+    try{  
+         if (empty($username) || empty($email) || empty($password)) {
+        return "Tous les champs doivent être remplis.";
+    }
 
         $passwordhash= password_hash($password, PASSWORD_DEFAULT);
         $data=[':username'=>$username,
@@ -55,19 +61,24 @@ public function signUp($username,$email,$password,$role){
 
 
 }
-// add admin's informations:
+
 public function insertAdmin(){
     try{
         $passwordhash= password_hash("rachida2024", PASSWORD_DEFAULT);
         $data=[':username'=>"rachida",
         ':email'=>"rachidarady@gmail.com",':password'=>$passwordhash,':role'=>"admin"];
-        $admin=$this->db->prepare("INSERT INTO users (username,email,password,role) VaLUES(:username,:email,:password,:role)");
-        return $admin->execute($data);
+        $admin=$this->db->prepare("INSERT INTO users (username,email,password,role) VALUES(:username,:email,:password,:role)");
+       
+        if ($admin) {
+            return $admin->execute($data);
+        } else {
+            die("Erreur de préparation de la requête SQL.");
+        }
 
 
     }
     catch(PDOException $e){
-        return "erreur".$e->getMessage();
+        return "Erreur dans insertAdmin: " . $e->getMessage();
 
     }
 }
@@ -91,6 +102,7 @@ public function login($email, $password){
                 $this->username = $user['username'];
                 $this->role = $user['role'];
                 $this->status = $user['status'];
+                
               
     
                 $_SESSION['user_id'] = $this->id;
@@ -102,7 +114,10 @@ public function login($email, $password){
 
                         exit();
                     case 'teacher':
-                        header("Location: ../teacher/add.php");
+                      
+                             header("Location: ../teacher/add.php");
+                       
+                       
                         exit();
                     case 'Etudiant':
                         header("Location: ../home/home.php");

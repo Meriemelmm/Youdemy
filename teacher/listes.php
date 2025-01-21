@@ -1,24 +1,7 @@
  <?php
                   
        require('../classes/teacher.php');  
-       
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
                   ?>
                   
                   
@@ -45,8 +28,8 @@
     <div class="container">
         <div class="header">
             <div>
-                <h2 class="title">Liste des utilisateurs</h2>
-                <p class="subtitle">Gestion des comptes utilisateurs</p>
+                <h2 class="title">Liste des etudiants</h2>
+                <p class="subtitle">Gestion des </p>
             </div>
             <div class="search-bar">
                 <input type="text" placeholder= "     Rechercher un utilisateur..." class="search-input">
@@ -59,39 +42,27 @@
         <div class="user-table">
             <table>
                 <thead>
-                    <tr> <th>titre de cours ></th>
-                        <th>username></th>
+                    <tr> <th>titre de cours </th>
+                        <th>username</th>
                         <th>email</th>
-                        <th>isncrit_at</th>
-                        <th>Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                <?php    $teacher=new teacher();
-        $teacherid=$_SESSION['user_id'];
+                 <?php    $teacher=new teacher();
+         $teacherid=$_SESSION['user_id'];
         
-        // $count=$teacher-> CountCourses($teacherid);
-        // echo"cours". $count;
-        // echo"nb_inscrit". $teacher->NB_inscrit($teacherid);
+        
         $etudiants=$teacher->ListeInscrit($teacherid) ; 
+        
        
         foreach( $etudiants as $etudiant) :?>
                     <tr>
                     <td><?php echo htmlspecialchars($etudiant['cours_title']);?> </td>
                         <td><?php echo htmlspecialchars($etudiant['username']);?> </td>
                         <td><?php echo htmlspecialchars($etudiant['email']);?> </td>
-                        <td>
-                            <span >
-                            </span>
-                        </td>
-                        <td class="actions">
-                            <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                <input type="hidden" name="user_id" value="">
-                                <button type="submit" name="delete" class="delete-btn">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
+                      
+                       
                     </tr>
                      <?php endforeach;?>
                 </tbody>

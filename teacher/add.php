@@ -5,6 +5,8 @@
 
 require'../classes/cour_text.php';
 require'../classes/vedio.php';
+require'../classes/tags.php';
+
 var_dump($_SESSION['username']);
 
 if (!isset($_SESSION['username'])) {
@@ -125,7 +127,7 @@ $teacherid= $_SESSION['user_id'] ;
                     <div class="form-item full-width">
     <label for="genre" class="form-label">Tags</label><div style="overflow-y: scroll;  height:100px ">
     <?php
-    $tags = (new admin())->showTags(); 
+    $tags = (new tags())->showTags(); 
     foreach ($tags as $tag):    
     ?> 
         <div class="checkbox-item">

@@ -9,7 +9,7 @@ try{
     if(isset($_POST['signup'])&&  isset($_POST['password']) && isset($_POST
         
   ['email'] )&& isset($_POST['username'])&&isset($_POST['roles'])){
-        echo" hello";
+       
        $username= $_POST['username'];
        $email= $_POST['email'];
        $password= $_POST['password'];
@@ -55,33 +55,7 @@ catch(PDOException $e){
         margin: 0 auto;
     }
     
-    header {
-        background-color: #121125;
-        color: white;
-        padding: 20px 0;
-    }
     
-    header h1 {
-        display: inline;
-        margin-left: 20px;
-    }
-    
-    nav ul {
-        list-style-type: none;
-        float: right;
-        margin-right: 20px;
-    }
-    
-    nav ul li {
-        display: inline;
-        margin-left: 15px;
-    }
-    
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-    }
-      
         /* Style du main */
         main {
             display: flex;
@@ -129,7 +103,8 @@ catch(PDOException $e){
             width: 100%;
             padding: 12px;
             background-color:      #133E87;
-            ;
+            background-color: #2c3e50;
+            
             color: white;
             font-size: 16px;
             border: none;
@@ -139,23 +114,12 @@ catch(PDOException $e){
         }
         
         button:hover {
-            background-color: #f39c12;
-        }</style>
+            background-color: #f26b38;
+        }
+      </style>
 </head>
 <body>
-    <!-- <header>
-        <div class="container">
-            <h1>BlogPress</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="login.php">Connexion</a></li>
-                  
-
-                </ul>
-            </nav>
-        </div>
-    </header> -->
+  
     <main>
         <section class="form-container">
             <h2>Inscription</h2>
@@ -187,7 +151,7 @@ catch(PDOException $e){
                   
                 </div>
                 <button type="submit" name="signup">S'inscrire</button>
-                <a href="../auth/login.php"> login in</a>
+                <a href="../auth/login.php" style=""> login in</a>
             </form>
         </section>
     </main>

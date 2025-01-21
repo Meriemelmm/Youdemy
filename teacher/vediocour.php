@@ -93,12 +93,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         <td class="actions">
                             <div class="action-btns">
                               
-                                <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
-                                <button type="submit" name="delete" class="delete-btn">
-                                <i class="fas fa-edit"></i>
-                                </button>
-                            </form>
+                            <a href="../teacher/update_vd.php?updateid=<?php echo htmlspecialchars($cour['cours_id'])?>"> <i class="fas fa-edit"></i></a>
                                 <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet cours ?');">
                                 <input type="hidden" name="cours_id" value="<?php echo htmlspecialchars($cour['cours_id'])?>">
                                 <button type="submit" name="remove" class="delete-btn">

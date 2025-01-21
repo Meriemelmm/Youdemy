@@ -2,6 +2,7 @@
 require'../classes/user.php';
 class teacher extends user{
 
+
 public function __construct() {
    parent:: __construct() ;
 }
@@ -80,11 +81,12 @@ public function inscrit_par_course($teacherid){
     try{
         $count = $this->db->prepare("SELECT  cours.cours_title,COUNT(inscrit_id) AS nb_inscrit 
         FROM inscrit_etudiant JOIN cours ON inscrit_etudiant.cours_id=cours.cours_id 
-        WHERE inscrit_etudiant.teacher_id = :teacherid GROUP BY cours.cours_title");
+        WHERE inscrit_etudiant.teacher_id = :teacherid GROUP BY cours.cours_title ORDER BY  nb_inscrit  DESC LIMIT 1");
     
      
      $count->execute([':teacherid' => $teacherid]); 
-       return $nb_course=$count->fetchAll( PDO::FETCH_ASSOC);
+        $nb_course=$count->fetch( PDO::FETCH_ASSOC);
+        return $nb_course['cours_title'];
       
      
          

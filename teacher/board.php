@@ -1,10 +1,27 @@
+<?php   require'../classes/teacher.php';
+$teacher= new teacher();
+$teacherid=$_SESSION['user_id'];
+$count_course=$teacher->CountCourses($teacherid);
+
+
+
+
+
+
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="../styleee.css"> -->
+ >
      <style> .main-content {
             flex: 1;
             display: flex;
@@ -66,7 +83,8 @@
             font-size: 24px;
             font-weight: bold;
             color: #2980b9;
-        }</style>
+        }
+        </style>
    <link rel="stylesheet" href="../styles.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
@@ -85,15 +103,15 @@
             <section class="content">
                 <div class="card">
                     <h3>nombre etudiants inscrit</h3>
-                    <p>150</p>
+                    <p><?php  echo htmlspecialchars($teacher-> NB_inscrit($teacherid) )  ?></p>
                 </div>
                 <div class="card">
                     <h3>nombre des cours</h3>
-                    <p>80</p>
+                    <p><?php  echo $count_course?></p>
                 </div>
                 <div class="card">
                     <h3>cour plus isncrit</h3>
-                    <p>1200€</p>
+                    <p><?php echo htmlspecialchars($teacher->inscrit_par_course($teacherid))?></p>
                 </div>
             </section>
         </main>

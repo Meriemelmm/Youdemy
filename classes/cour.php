@@ -3,8 +3,8 @@
 require_once '../classes/database.php';
 class course
 {
-   private  $gameid;
-   private $tile;
+   private  $course_id;
+   private $title;
    private $description;
    private $content;
    private $categorieid;
@@ -16,7 +16,41 @@ class course
    {
       $this->db =  (new database)->getconnect();
    }
+   
 
+   
+   public function setTitle($title) {
+       $this->title = $title;
+   }
+   
+   public function getTitle() {
+       return $this->title;
+   }
+   
+   public function setDescription($description) {
+       $this->description = $description;
+   }
+   
+   public function getDescription() {
+       return $this->description;
+   }
+   
+   public function setCategorieId($categorieid) {
+       $this->categorieid = $categorieid;
+   }
+   
+   public function getCategorieId() {
+       return $this->categorieid;
+   }
+   
+   public function setTags($tags) {
+       $this->tags = $tags;
+   }
+   
+   public function getTags() {
+       return $this->tags;
+   }
+   
 
    public function addCour($Categorieid, $title, $content, $description, $teacherid, $tags)
    {
@@ -33,6 +67,8 @@ class course
             ':teacherid' => $teacherid
 
          ];
+         
+         
 
          $cour = $this->db->prepare("INSERT INTO cours (category_id, cours_title, cours_description, teacher_id, text_content)
                                     VALUES (:categorieid, :title, :description, :teacherid)");
@@ -42,8 +78,10 @@ class course
 
 
          foreach ($tags as $tagid) {
+           
             $tag = $this->db->prepare("INSERT INTO tag_course (tag_id, cours_id) VALUES (:tagid, :coursid)");
             $tag->execute([":tagid" => $tagid, ":coursid" => $coursd]);
+
          }
          return true;
       } else {
@@ -73,7 +111,7 @@ class course
          $remove = $this->db->prepare("DELETE  FROM cours WHERE cours_id=:coursid");
          return $remove->execute([":coursid" => $coursid]);
       } catch (PDOException $e) {
-         echo " ereur" . $e->getMessage();
+         return " ereur" . $e->getMessage();
       }
    }
    public function getCourseid($courseid)
@@ -105,9 +143,9 @@ class course
       $limit = 2;
       $offset = $limit * ($index - 1);
 
-      $sql = "SELECT cours.cours_title, cours.cours_description, cours.cours_id, categories.categorie_id
+      $sql = "SELECT cours.cours_title, cours.cours_description, cours.cours_id, categories.categorie_id,categories.categorie_name ,users.username,users.user_id
       FROM cours 
-      JOIN categories ON categories.categorie_id = cours.category_id 
+      JOIN categories ON categories.categorie_id = cours.category_id  JOIN  users ON users.user_id=cours.teacher_id
       WHERE cours.cours_title LIKE :search
       LIMIT $limit OFFSET $offset";
 
@@ -124,5 +162,13 @@ class course
       $info["total_pages"] = ceil((int)$total_cours["total_cours"] / $limit);
 
       return $info;
+   }
+   public  function totalPages($index, $search){
+      $limit=2;
+      $total_course=$this->db->prepare("SELECT COUNT(cours_id) AS total_cours FROM cours WHERE cours_title LIKE :search");
+      $total_course->execute();
+      $total_course=$total_course->fetch();
+      $total_pages=ceil($total_course['total_cours']/ $limit);
+
    }
 }
