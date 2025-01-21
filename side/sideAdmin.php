@@ -72,7 +72,7 @@
             <div class="user-info">
                 <img src="https://api.dicebear.com/6.x/initials/svg?seed=" class="user-avatar">
                 <div>
-                    <p class="user-name"></p>
+                    <p class="user-name"> <?php echo htmlspecialchars( $_SESSION['username']);?></p>
                     <p class="user-role">administrateur</p>
                 </div>
             </div>
