@@ -132,6 +132,8 @@ if (isset($_POST['isncrit']) ) {
             color: black;
             padding: 5px;
             border-radius: 5px;
+            background-color: #f26b38;
+         
         }
 
         .cours-card .btn {
@@ -147,49 +149,20 @@ if (isset($_POST['isncrit']) ) {
         }
 
        
-        /* Pied de page */
-        footer {
-            background-color: black;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        footer .footer-container {
-            margin-top: 20px;
-        }
-
-        footer .footer-menu {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            list-style: none;
-        }
-
-        footer .footer-menu li a {
-            color: white;
-            font-size: 1em;
-        }
-
-        footer .footer-menu li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
+      
 
 
-        /* Basic reset for margin/padding */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Styling for the header and navigation */
+      
         header {
-            /* Dark background */
-            color: #fff;
-            /* White text */
+           
+           
+          
             padding: 20px 10%;
         }
 
@@ -199,7 +172,7 @@ if (isset($_POST['isncrit']) ) {
             align-items: center;
         }
 
-        /* Logo styling */
+       
 
         .logo h1 {
             font-size: 2.5em;
@@ -221,12 +194,7 @@ if (isset($_POST['isncrit']) ) {
             color: #f26b38;
         }
 
-        /* Menu styling */
-
-
        
-        /* new */
-        /* RESET CSS */
 * {
     margin: 0;
     padding: 0;
@@ -252,10 +220,8 @@ header {
     color: black;
     padding: 20px 0;
     height: 100px;
-    background-color: #2c3e50;
-    background-color: #3498DB;
-    background-color:#1ABC9C;
-    background-color: #3498DB;;
+   
+    
   
     
 }
@@ -283,7 +249,7 @@ header ul.menu {
 }
 
 header ul.menu li a {
-    color: white;
+    color: rgb(15, 4, 44);
     font-size: 1.2em;
     font-weight: bold;
 }
@@ -353,7 +319,7 @@ header ul.menu li a:hover {
 
 /* Footer */
 footer {
-    background-color: #2c3e50;
+    background-color:#2196F3;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -474,24 +440,22 @@ form button:hover {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Active Page Style */
 
-/* Hover Effect */
 .pagination a:hover {
     background-color: #1e88e5;
-    transform: scale(1.1); /* Agrandir le bouton au survol */
+    transform: scale(1.1); 
 }
 
-/* Disabled State (For non-clickable pages) */
+
 .pagination a.disabled {
     background-color: #b0bec5;
     color: white;
-    pointer-events: none; /* Désactiver l'interaction */
+    pointer-events: none; 
 }
 
-/* Pagination First and Last Button Roundness */
+
 .pagination a:first-child {
-    border-radius: 5px 0 0 5px; /* Bord arrondi pour le premier bouton */
+    border-radius: 5px 0 0 5px; 
 }
 
 .pagination a:last-child {
@@ -533,14 +497,15 @@ form button:hover {
                 ?>
 
 
-                <li><a href="#">sign up</a></li>
-                <li><a href="#">login</a></li>
+                <li><a href="../auth/signup.php">sign up</a></li>
+                <li><a href="../auth/login.php">login</a></li>
+               
 
             </ul>
         </nav>
     </header>
     <form method="POST">
-        <h1>Search</h1>
+       
         <input type="text" name="search" placeholder="enter your search">
         <button type="submit">Submit</button>
     </form>
@@ -591,7 +556,7 @@ form button:hover {
                     </div>
                     <div style="display:flex; gap:20px ">
                         <a href="../home/details.php?detail=<?php echo htmlspecialchars($coursid); ?>"
-                            class="btn" style="margin-top:40px">Plus pxdétails</a>
+                            class="btn" style="margin-top:40px">Plus détails</a>
                         <form method="POST" onsubmit="return confirm('Voulez-vous vraiment inscrit dans ce cours  ?');">
                             <input type="hidden" name="cours_id" value="<?php echo htmlspecialchars($coursid); ?>">
                             <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($course['user_id']); ?>">

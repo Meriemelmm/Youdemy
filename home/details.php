@@ -7,7 +7,7 @@
  require'../classes/tag_course.php';
  $course= new course();
  $courseid=$_GET['detail'];
- echo  $courseid;
+ 
  $courses=$course->gettedCourse($courseid);
  $tag_course=new tag_course();
  $tags=$tag_course->tags_course($courseid);
@@ -42,50 +42,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            color: rgb(15, 4, 44);
         }
         
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color:white;
+            color: rgb(15, 4, 44);
             line-height: 1.6;
         }
         
-        /* Header */
-        header {
-            background-color: #0a2dbb;
-            color: white;
-            padding: 20px 0;
-        }
         
-        header .container {
-            width: 80%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        header h1 {
-            font-size: 1.8rem;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        /* Main content */
+       
         main {
             padding: 40px 0;
         }
@@ -125,7 +93,7 @@
         }
         
         .tag {
-            background-color: #e0e0e0;
+           
             color: #333;
             padding: 5px 10px;
             margin-right: 10px;
@@ -189,49 +157,14 @@
             text-align: center;
         }
         
-        .inscription-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+      
         
-        .inscription-btn:hover {
-            background-color: #45a049;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        
-        footer .container {
-            width: 80%;
-            margin: 0 auto;
-        }
+      
         </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>YOUDEMY</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Cours</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+
 
     <main> 
            <?php  foreach( $courses as $course ):
@@ -242,7 +175,7 @@
             <section class="cours-header">
                 <h2><?php echo htmlspecialchars($course['cours_title']);?> </h2>
                 <p class="cours-intro"><?php echo htmlspecialchars($course['cours_description'])?></p>
-                <p><strong>Code du Cours :</strong> IA2025</p>
+               
             </section>
 
            
@@ -270,7 +203,7 @@
             <section class="cours-header">
                 <h2> <?php echo  htmlspecialchars($course['cours_title']);?></h2>
                 <p class="cours-intro"> <?php echo htmlspecialchars($course['cours_description']);?></p>
-                <p><strong>Code du Cours :</strong> IA2025</p>
+               
             </section>
 
            
@@ -303,12 +236,8 @@
         <?php endforeach;?>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Université Exemple. Tous droits réservés.</p>
-        </div>
-    </footer>
+ 
+  
 </body>
 </html>
 
