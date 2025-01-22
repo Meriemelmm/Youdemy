@@ -27,40 +27,40 @@ public function getPassword(){  return $this->password;}
 public function gtRole(){  return $this->role;}
 public function getStatus(){  return $this->status;}
 //  sign up 
-public function signUp($username,$email,$password,$role){
+// public function signUp($username,$email,$password,$role){
 
-    try{  
-         if (empty($username) || empty($email) || empty($password)) {
-        return "Tous les champs doivent être remplis.";
-    }
+//     try{  
+//          if (empty($username) || empty($email) || empty($password)) {
+//         return "Tous les champs doivent être remplis.";
+//     }
 
-        $passwordhash= password_hash($password, PASSWORD_DEFAULT);
-        $data=[':username'=>$username,
-        ':email'=>$email,':password'=>$passwordhash,
-        ':role'=>$role];
+//         $passwordhash= password_hash($password, PASSWORD_DEFAULT);
+//         $data=[':username'=>$username,
+//         ':email'=>$email,':password'=>$passwordhash,
+//         ':role'=>$role];
 
-        $us= $this->db-> prepare("SELECT *FROM users  WHERE email=:email");
-        $us->execute([':email'=>$email]);
-        $result=$us->fetchAll(PDO::FETCH_ASSOC);
-        if(!empty( $result)){
-            return "already exist this email";
+//         $us= $this->db-> prepare("SELECT *FROM users  WHERE email=:email");
+//         $us->execute([':email'=>$email]);
+//         $result=$us->fetchAll(PDO::FETCH_ASSOC);
+//         if(!empty( $result)){
+//             return "already exist this email";
 
 
 
-        }
+//         }
 
-        $user="INSERT INTO users (username,email,password,role) VALUES(:username,:email,:password,:role)";
-        $userInsrt=$this->db->prepare($user);
-        return $userInsrt->execute($data);
+//         $user="INSERT INTO users (username,email,password,role) VALUES(:username,:email,:password,:role)";
+//         $userInsrt=$this->db->prepare($user);
+//         return $userInsrt->execute($data);
 
 
         
-    }catch(PDOException $e){
-        return " erreur".$e->getMessage();
-    }
+//     }catch(PDOException $e){
+//         return " erreur".$e->getMessage();
+//     }
 
 
-}
+// }
 
 public function insertAdmin(){
     try{
@@ -139,6 +139,67 @@ public function login($email, $password){
         return "Erreur : " . $e->getMessage();
     }
 }
+
+
+
+public function signUp($username, $email, $password, $role) {
+    try {  
+       
+        if (empty($username) || empty($email) || empty($password)) {
+            return "Tous les champs doivent être remplis.";
+        }
+
+        
+        $validated_username = true;
+        for ($i = 0; $i < strlen($username); $i++) {
+           
+            if (!((($username[$i] >= 'a' && $username[$i] <= 'z') || ($username[$i] >= 'A' && $username[$i] <= 'Z')))) {
+                $validated_username = false;
+                return "Le nom d'utilisateur doit contenir uniquement des lettres.";
+            }
+        }
+
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            $validated_username = false;
+            return"email incoreect";
+
+        }
+
+        
+        $us = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        $us->execute([':email' => $email]);
+        $result = $us->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($result)) {
+            return "Cet email est déjà utilisé.";
+        }
+
+        
+        if ($validated_username) {
+           
+            $passwordhash = password_hash($password, PASSWORD_DEFAULT);
+            $data = [
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $passwordhash,
+                ':role' => $role
+            ];
+
+            $userInsert = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, :role)");
+            if ($userInsert->execute($data)) {
+                return "Inscription réussie.";
+            } else {
+                return "Erreur lors de l'insertion de l'utilisateur.";
+            }
+        }
+
+    } catch (PDOException $e) {
+        return "Erreur : " . $e->getMessage();
+    }
+}
+
 
 
 

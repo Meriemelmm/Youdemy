@@ -10,6 +10,10 @@
 //   }
  require'../classes/admin.php';
  $admin=new admin();
+ if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+} 
 
 $admin->showTeachers();
 if($_SERVER['REQUEST_METHOD'] === 'POST')

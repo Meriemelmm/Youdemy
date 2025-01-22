@@ -7,12 +7,13 @@
 
 
 // require '../classes/user.php';
-// if (!isset($_SESSION['username'])) {
-//     header('Location: ../auth/login.php');
-//     exit();
-// }
+
 
 require'../classes/admin.php';
+if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
 $admin= new admin();
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['ajoute']) && isset($_POST['categorie'])){

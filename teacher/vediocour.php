@@ -6,6 +6,7 @@ require'../classes/user.php';
 require'../classes/vedio.php';
 require'../classes/tag_course.php';
 $teacherId=$_SESSION['user_id'];
+
 $course= new cour_vedio();
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['remove']) && isset($_POST['cours_id'])){
@@ -19,6 +20,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         }
        
     }
+}
+if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
 }
 
 

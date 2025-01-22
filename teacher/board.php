@@ -1,4 +1,8 @@
 <?php   require'../classes/teacher.php';
+if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
 $teacher= new teacher();
 $teacherid=$_SESSION['user_id'];
 $count_course=$teacher->CountCourses($teacherid);

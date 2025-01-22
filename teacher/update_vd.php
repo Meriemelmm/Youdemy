@@ -1,6 +1,10 @@
 
 <?php require'../classes/admin.php';
 require'../classes/tags.php';
+if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
 
 
 

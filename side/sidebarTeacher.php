@@ -5,9 +5,7 @@
 
 <aside class="sidebar">
         <div class="sidebar-header">
-        <div class="logo">
-                <h1><i class="fas fa-graduation-cap"></i> YOUDEMY</h1>
-            </div>
+        <h1 class="title">Youdemy</h1>
             <p class="subtitle">teacher</p>
         </div>
     
@@ -69,10 +67,10 @@
             <a href="../profile/profile.php" class="footer-link">
                 <i class="fas fa-user"></i>Mon Profil
             </a>
-            <a href="../auth/login.php" class="footer-link">
-                <i class="fas fa-sign-out-alt"></i>Déconnexion
+            <a href="../teacher/deconnect.php" class="footer-link">
+                <i class="fas fa-sign-out-alt">Déconnexion</i>
             </a>
         </div>
     </aside>
-    <!-- https://melmecaniqui-1736762478059.atlassian.net/jira/software/projects/KAN/boards/1 -->
+
 

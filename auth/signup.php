@@ -15,6 +15,8 @@ try{
        $password= $_POST['password'];
        $role= $_POST['roles'];
          echo $user->signUp( $username,$email,$password,$role);
+         header("location:../auth/login.php");
+        
 
 
 

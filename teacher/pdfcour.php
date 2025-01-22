@@ -2,10 +2,15 @@
 
 <?php
 session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
 
 
 require'../classes/cour_text.php';
 require'../classes/tags.php';
+
 $teacherId=$_SESSION['user_id'];
 $course= new text_cour();
 

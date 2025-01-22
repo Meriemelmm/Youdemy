@@ -201,25 +201,9 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #4a5568;
 }
-.logo h1 {
-    font-size: 2.5em;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
-    color: rgb(15, 4, 44);
-
-    letter-spacing: 3px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
 
 
-.logo h1 i {
-    margin-right: 05px;
-    font-size: 1.2em;
-   
-    color: #f26b38;
-}
+
 
 th {
     color: white;

@@ -79,7 +79,7 @@
             <a href="../profile/profile.php" class="footer-link">
                 <i class="fas fa-user"></i>Mon Profil
             </a>
-            <a href="../auth/login.php" class="footer-link">
+            <a href="../teacher/deconnect.php" class="footer-link">
                 <i class="fas fa-sign-out-alt"></i>Déconnexion
             </a>
         </div>

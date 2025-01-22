@@ -2,6 +2,10 @@
  require '../classes/admin.php';
  require '../classes/cour.php';
  require '../classes/tag_course.php';
+ if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+} 
 
  $course = new course();
 

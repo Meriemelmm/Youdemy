@@ -1,13 +1,15 @@
 
 
 
-<?php require'../classes/admin.php';
+<?php 
+require '../classes/admin.php';
 
-require'../classes/cour_text.php';
-require'../classes/vedio.php';
-require'../classes/tags.php';
+require '../classes/cour_text.php';
+require '../classes/vedio.php';
+require '../classes/tags.php';
 
-var_dump($_SESSION['username']);
+
+
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../auth/login.php');
@@ -66,7 +68,8 @@ $teacherid= $_SESSION['user_id'] ;
 
 
 
-?> <!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

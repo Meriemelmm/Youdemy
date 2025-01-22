@@ -36,6 +36,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             echo " erreur".$e->getMessage();
         }
     }}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../auth/login.php');
+        exit();
+    } 
 
 
 

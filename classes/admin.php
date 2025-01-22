@@ -1,5 +1,5 @@
 <?php
-require'../classes/user.php';
+require '../classes/user.php';
 class admin extends user{
 private $data;
 

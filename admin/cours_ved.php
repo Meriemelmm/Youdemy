@@ -4,6 +4,10 @@
  require '../classes/tag_course.php';
 
  $course = new course();
+ if (!isset($_SESSION['username'])) {
+    header('Location: ../auth/login.php');
+    exit();
+} 
 
  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['remove']) && isset($_POST['cours_id'])) {
