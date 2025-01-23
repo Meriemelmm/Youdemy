@@ -1,5 +1,6 @@
 <?php
 require'../classes/user.php';
+
 class teacher extends user{
 
 
@@ -59,9 +60,9 @@ public function CountCourses($teacherid){
 }
 public function  NB_inscrit($teacherid){
     try{
-    $count = $this->db->prepare("SELECT COUNT(inscrit_id) AS nb_inscrit 
-    FROM inscrit_etudiant 
-    WHERE teacher_id = :teacherid");
+    $count = $this->db->prepare("SELECT COUNT(DISTINCT etudiant_id) AS nb_inscrit
+            FROM inscrit_etudiant
+            WHERE teacher_id = :teacherid");
 
  
  $count->execute([':teacherid' => $teacherid]); 
@@ -86,7 +87,13 @@ public function inscrit_par_course($teacherid){
      
      $count->execute([':teacherid' => $teacherid]); 
         $nb_course=$count->fetch( PDO::FETCH_ASSOC);
-        return $nb_course['cours_title'];
+        if($nb_course){
+             return $nb_course['cours_title'];
+        }
+        else{
+            return " n existe pas";
+        }
+       
       
      
          

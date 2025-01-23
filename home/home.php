@@ -19,6 +19,7 @@ if (isset($_POST['isncrit']) ) {
         $etudiant = (new Etudiant())->inscriptionCourses($userid, $coursid, $teacherid);
     }
 }
+
    
 ?>
 <!DOCTYPE html>
@@ -132,7 +133,7 @@ if (isset($_POST['isncrit']) ) {
             color: black;
             padding: 5px;
             border-radius: 5px;
-            background-color: #f26b38;
+           
          
         }
 
@@ -497,9 +498,13 @@ form button:hover {
                 ?>
 
 
+
                 <li><a href="../auth/signup.php">sign up</a></li>
                 <li><a href="../auth/login.php">login</a></li>
+
                
+                <li><a href="../teacher/deconnect.php">deconnexion</a></li>
+                
 
             </ul>
         </nav>
@@ -555,8 +560,9 @@ form button:hover {
                     <span>JavaScript</span> -->
                     </div>
                     <div style="display:flex; gap:20px ">
+                        <?php if(isset($_SESSION['user_id'])&& $_SESSION['role']==='Etudiant'):?>
                         <a href="../home/details.php?detail=<?php echo htmlspecialchars($coursid); ?>"
-                            class="btn" style="margin-top:40px">Plus détails</a>
+                            class="btn" style="margin-top:40px">Plus détails</a> <?php endif?>
                         <form method="POST" onsubmit="return confirm('Voulez-vous vraiment inscrit dans ce cours  ?');">
                             <input type="hidden" name="cours_id" value="<?php echo htmlspecialchars($coursid); ?>">
                             <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($course['user_id']); ?>">

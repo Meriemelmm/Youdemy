@@ -9,7 +9,9 @@
 // require '../classes/user.php';
 
 
-require'../classes/admin.php';
+require '../classes/admin.php';
+require '../classes/catego.php';
+
 if (!isset($_SESSION['username'])) {
     header('Location: ../auth/login.php');
     exit();
@@ -129,8 +131,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="container">
         <div class="header">
             <div>
-                <h2 class="title">Gérer utilisateurs </h2>
-                <p class="subtitle">Liste d'utilisateurs</p>
+                <h2 class="title">Gérer categories </h2>
+                <p class="subtitle">Liste categories</p>
             </div>
            
         </div>
@@ -139,7 +141,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             <table>
                 <thead>
                     <tr>
-                        <th>tag</th>
+                        <th>categorie</th>
                        
                         <th>action</th>
                         
@@ -148,7 +150,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 <tbody>
               
                    <?php
-                   $categories=$admin-> showCategorie();
+                   $categories=(new categories() )-> showCategorie();
                    foreach($categories as $categorie):
                    
                    ?>

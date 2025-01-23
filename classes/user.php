@@ -108,17 +108,22 @@ public function login($email, $password){
                 $_SESSION['user_id'] = $this->id;
                 $_SESSION['username'] = $this->username;
                 $_SESSION['role'] = $this->role;
+
                 switch ($user['role']) {
                     case 'admin':
                         header("Location: ../admin/boardAd.php?user_id=" );
 
                         exit();
                     case 'teacher':
-                      
-                             header("Location: ../teacher/add.php");
-                       
-                       
+                        if($user['compte_status']==="accepted"){ header("Location: ../teacher/add.php");
                         exit();
+                    }
+                      
+                         else {
+                            header("location:../home/home.php");
+exit();
+                         }
+                            
                     case 'Etudiant':
                         header("Location: ../home/home.php");
                         exit();
